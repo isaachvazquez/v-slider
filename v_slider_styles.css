@@ -1,0 +1,122 @@
+/*===========================================
+			v_slider PLUGIN STYLES
+===========================================*/
+
+/*-------V SLIDER (MAIN CONTAINER)-------*/
+.v_slider {
+	position: relative;
+	margin: 0 auto;
+	min-height: 100px;
+	max-width: 100%;
+	overflow: hidden;
+	/*background: #f9f9f9;*/
+}
+
+
+/*-------LINKS-------*/
+.v_slider_links {
+	position: absolute;
+	top: 3%;
+	left: 0;
+	z-index: 99;
+	margin: 0;
+	width: 50%;
+	min-height: 0;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.v_slider:hover .v_slider_links {
+	/*Add in hover styles for the links*/
+}
+
+.v_slider_links a {
+	position: absolute;
+	display: block; /*Necessary for full_width_links*/
+	display: none;
+	width: 100%;
+	padding: 5px 0;
+	background: #f9f9f9;
+	color: #2d2d2d;
+	font-size: 20px;
+	text-align: center;
+	/*border-radius: 2px;*/
+}
+
+.v_slider_links a:hover {
+	
+}
+
+/*-------VSLIDER SLIDER IMAGE CONTAINER-------*/
+.v_slider_container {
+	position: relative;
+	min-height: 100px;
+}
+
+.v_slider_image {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	/*SET OPACITY: 0; FOR ALL SLIDES*/
+	 -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
+	filter: alpha(opacity=0); /* IE 5-7 */
+	-moz-opacity: 0; /* Netscape */	
+	-khtml-opacity: 0; /* Safari 1.x */
+	opacity: 0; /* Good browsers */
+
+
+	float: left;
+}
+
+.v_slider_container .i1 { display: block; }
+
+
+
+/*-------V SLIDER CONTROLS-------*/
+.v_slider_controls {
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin: -25px 0 0 0;
+	width: 100%;
+	height: 50px;
+}
+
+.v_slider_controls img {
+	width: 50px;
+}
+
+.v_slider:hover .v_slider_controls {
+	display: block;
+}
+
+.v_slider_next_button, .v_slider_back_button {
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	opacity: 0.5;
+
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+}
+
+.v_slider_next_button { float: right; }
+.v_slider_back_button { float: left; }
+
+.v_slider_next_button:hover, .v_slider_back_button:hover {
+	opacity: 0.9;
+}
+
+/*-------V SLIDER CLEAR RULE-------*/
+.v_slider_clear {
+	clear: both;
+}
+
+/*===========================================
+		END v_slider PLUGIN STYLES
+===========================================*/
+
+
+
