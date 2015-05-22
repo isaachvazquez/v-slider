@@ -9,61 +9,49 @@ Author: Isaac Vazquez
 
 
 $(document).ready(function() {
-        $('header').fadeTo(0, 0);
-        $('.mainwrap').fadeTo(0, 0);
-        $('footer').fadeTo(0, 0);
-        $('img').hide();
-        $('#loader').show();
-});
-
-$(window).bind("load", function() {
-        $('#loader').fadeTo(200, 0);
+	$('#loader').fadeTo(200, 0);
         $('header').fadeTo(500, 1);
         $('.mainwrap').fadeTo(500, 1);
         $('footer').fadeTo(500, 1);
         $('img').show();
-        //Instantiate vSlider
-        (function ($) {
 
-                $('.boss').v_slider({
-                speed                           : 4000, //Speed of slides (4000 = 4s)
-                transition_speed                : 1000, //Speed of transition between slides
-                paused                          : false, //Change to true if you dont want the slider to start on load
-                // full_width_links             : true,
-                // max_slider_width        : 700, //Set this equal to the size of the parent elements max width
-                // fixed_container_height               : 250,
-                });
+        $('.boss').v_slider({
+        speed                           : 4000, //Speed of slides (4000 = 4s)
+        transition_speed                : 1000, //Speed of transition between slides
+        paused                          : false, //Change to true if you dont want the slider to start on load
+        // full_width_links             : true,
+        // max_slider_width        : 700, //Set this equal to the size of the parent elements max width
+        // fixed_container_height               : 250,
+        });
 
-                $('.v11').v_slider({
-                speed                           : 3000, //Speed of slides (4000 = 4s)
-                transition_speed                : 2000, //Speed of transition between slides
-                paused                          : false, //Change to true if you dont want the slider to start on load
-                full_width_links                : true,
-                });
+        $('.v11').v_slider({
+        speed                           : 3000, //Speed of slides (4000 = 4s)
+        transition_speed                : 2000, //Speed of transition between slides
+        paused                          : false, //Change to true if you dont want the slider to start on load
+        full_width_links                : true,
+        });
 
-                $('.v22').v_slider({
-                speed                           : 4000, //Speed of slides (4000 = 4s)
-                transition_speed                : 700, //Speed of transition between slides
-                paused                          : false, //Change to true if you dont want the slider to start on load
-                full_width_links                : false,
-                });
+        $('.v22').v_slider({
+        speed                           : 4000, //Speed of slides (4000 = 4s)
+        transition_speed                : 700, //Speed of transition between slides
+        paused                          : false, //Change to true if you dont want the slider to start on load
+        full_width_links                : false,
+        });
 
-                $('.v33').v_slider({
-                speed                           : 3000, //Speed of slides (4000 = 4s)
-                transition_speed                : 500, //Speed of transition between slides
-                paused                          : false, //Change to true if you dont want the slider to start on load
-                });
+        $('.v33').v_slider({
+        speed                           : 3000, //Speed of slides (4000 = 4s)
+        transition_speed                : 500, //Speed of transition between slides
+        paused                          : false, //Change to true if you dont want the slider to start on load
+        });
 
-                $('.loner').v_slider({
-                speed                           : 60000, //Speed of slides (4000 = 4s)
-                transition_speed                : 2000, //Speed of transition between slides
-                paused                          : false, //Change to true if you dont want the slider to start on load
-                // full_width_links             : true,
-                // max_slider_width        : 700, //Set this equal to the size of the parent elements max width
-                // fixed_container_height               : 250,
-                });
-
-        })(jQuery);
+        $('.loner').v_slider({
+        speed                           : 60000, //Speed of slides (4000 = 4s)
+        transition_speed                : 2000, //Speed of transition between slides
+        paused                          : false, //Change to true if you dont want the slider to start on load
+        // full_width_links             : true,
+        // max_slider_width        : 700, //Set this equal to the size of the parent elements max width
+        // fixed_container_height               : 250,
+        });
 
 });
 
