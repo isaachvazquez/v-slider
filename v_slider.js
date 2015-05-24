@@ -37,8 +37,8 @@ $el[find_something]('img');
 
         // These locally scoped variables help minification by aliasing strings
         var data_key               =  'v_slider_options', // Namespace plugin data
-                event_suffix           =  '.v_slider',        // Namspace events
-                class_prefix           =  '.v_slider_',        // Namspace events
+            event_suffix           =  '.v_slider',        // Namspace events
+            class_prefix           =  '.v_slider_',        // Namspace events
 
 
                 // Custom events
@@ -175,8 +175,12 @@ $el[find_something]('img');
                         aspectRatio = null,
                         hasPortraitImages = false, // boolean value
                         hasLandscapeImages = false, // boolean value 
-                        screenWidth = $(document).width();
+                        parentWidth = $el.parent().width();// Needs to be slider width (or parent of images)
                         // console.log('Images in v_slider: ' + numOfImageElements);
+
+                    console.log('Screen Width: ' + parentWidth);
+                    console.log(parentWidth);
+                    // console.log('Event Prefix Variable: ' + event_suffix);
 
 
                     var imageIndex = 1;
@@ -243,23 +247,23 @@ $el[find_something]('img');
                         if(hasPortraitImages && !hasLandscapeImages) {
                             // This covers if there are only Portrait Oriented Images
                             aspectRatio = tallestPortraitImageHeight / tallestPortraitImageWidth;
-                            sliderHeight = ((screenWidth * aspectRatio) / 2);
+                            sliderHeight = ((parentWidth * aspectRatio) / 2);
                             // console.log('Slider Height: ' + sliderHeight + 'px');
                         } else {
                             // This covers all other combinations
                             aspectRatio = tallestLandscapeImageHeight / tallestLandscapeImageWidth;
-                            sliderHeight = screenWidth * aspectRatio;
+                            sliderHeight = parentWidth * aspectRatio;
                             // console.log('Slider Height: ' + sliderHeight + 'px');
                         }
                         // console.log('Aspect Ratio: ' + aspectRatio);
 
                         // Check options.max_slider_width
                         if (options.max_slider_width != null) {
-                            if(screenWidth < options.max_slider_width){
+                            if(parentWidth < options.max_slider_width){
                                 //use parent width
-                                screenWidth = $el.parent().width();
+                                parentWidth = $el.parent().width();
                             }else{
-                                screenWidth = options.max_slider_width;
+                                parentWidth = options.max_slider_width;
                             }
                         }
 
@@ -275,7 +279,7 @@ $el[find_something]('img');
                         options.container.css('height', '' + options.fixed_container_height + 'px');
                     }else{
                         options.container.css('height', '' + sliderHeight + 'px');
-                        $('.slider-height').text(sliderHeight);// console.log('Container Height Set to ' + sliderHeight + 'px!');
+                        // console.log('Container Height Set to ' + sliderHeight + 'px!');
                     }
 
 

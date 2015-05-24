@@ -46,17 +46,52 @@
 		<div class="v_slider_clear"></div>
 		</div>
 	</div>
-	<p>Tallest Image: <span class="tallest-image">0</span></p>
-	<p>Slider Height: <span class="slider-height">0</span></p>
-	<p><span class="slider-width">0</span></p>
+	
+	<div class="v_slider v11">
+		<div class="v_slider_links">
+			<a href="http://www.google.com"></a>
+			<a href="http://www.clockwork.net"></a>
+			<a href="http://www.isaacv.net"></a>
+			<a href="http://www.jakeandersonphoto.com/blog"></a>
+			<a href="http://www.trinity-studios.com"></a>
+		</div>
+		<div class="v_slider_container">
+			<img src="images/lake2.png">
+			<img src="images/lake.png">
+			<img src="images/lake1.png">
+			<img src="images/lake3.png">
+			<img src="v-images/room.png">
+			<div class="v_slider_clear"></div>
+		</div>
+		<div class="v_slider_controls">
+			<div class="v_slider_back_button">
+				<img src="images/v-slider-left-arrow.png">
+			</div>
+			<div class="v_slider_next_button">
+				<img src="images/v-slider-right-arrow.png">
+			</div>
+		<div class="v_slider_clear"></div>
+		</div>
+	</div>
+
+
 	<script src="jquery-1.10.2.js"></script>
 	<script src="v_slider.js"></script>
 	<script type="text/javascript">
 		$('.my-slider').v_slider({
 			speed                           : 3000, //Speed of slides (4000 = 4s)
-            transition_speed                : 500, //Speed of transition between slides
+            transition_speed                : 700, //Speed of transition between slides
             paused                          : false, //Change to true if you dont want the slider to start on load
             // full_width_links             : true,
+            // max_slider_width        : 700, // Set this equal to the size of the parent elements max width
+            // fixed_container_height          : 250, // Only good if you're using images with specific heights
+		});
+
+		$('.v11').v_slider({
+			speed                           : 4000, //Speed of slides (4000 = 4s)
+            transition_speed                : 1000, //Speed of transition between slides
+            paused                          : false, //Change to true if you dont want the slider to start on load
+            full_width_links             	: true,
             // max_slider_width        : 700, // Set this equal to the size of the parent elements max width
             // fixed_container_height          : 250, // Only good if you're using images with specific heights
 		});
