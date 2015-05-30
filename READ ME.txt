@@ -98,5 +98,4 @@ and also above your main javascript file.
 	.
 	.
 	<script src="path/to/v_slider.js"></script>
-	<script src="main.js"></script>
 </body>
