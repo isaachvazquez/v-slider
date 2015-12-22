@@ -96,14 +96,15 @@ $el[find_something]('img');
 
       // Click events
       //==============
-      $el.find('' + class_prefix + 'next_button').click(function() {
+      $('body').on('click', '.v_slider_controls a', function(e) {
+        var action = $(this).attr('data-action');
         window.clearInterval(v_slider_timer);
-        $el.v_slider('next_image');
-      });
-
-      $el.find('' + class_prefix + 'back_button').click(function() {
-        window.clearInterval(v_slider_timer);
-        $el.v_slider('previous_image');
+        if(action === 'next'){
+          $el.v_slider('next_image');
+        }else
+        if(action === 'previous'){
+          $el.v_slider('previous_image');
+        }
       });
 
       return $el;
@@ -121,7 +122,7 @@ $el[find_something]('img');
       // Create CONTROLS
       //==================
       // <div class="v_slider_controls">
-      //   <a href="#" data-action="back">
+      //   <a href="#" data-action="previous">
   		// 	 <img src="images/v-slider-left-arrow.png">
   		//   </a>
   		//   <a href="#" data-action="next">
@@ -228,8 +229,6 @@ $el[find_something]('img');
         }
         console.log('Aspect Ratio: ' + aspectRatio);
 
-        // TODO
-
         console.log('i: ' + i + ', imageIndex: ' + imageIndex);
         imageIndex++;
       } // End For Loop (Looping through images to get heights)
@@ -238,29 +237,23 @@ $el[find_something]('img');
       //=============================================================
       //=============================================================
       //=============================================================
-      // Check options.max_slider_width
+      // Set Slider width
       if (options.max_slider_width != null) {
         if (sliderWidth < options.max_slider_width) {
-          //use parent width
-          sliderWidth = $el.width();
+          $el.css({ 'max-width': options.max_slider_width + 'px'});
         } else {
           sliderWidth = options.max_slider_width;
+          $el.css({ 'max-width': sliderWidth + 'px'});
         }
-        $el.css({ 'max-width': sliderWidth + 'px'});
       }else{
         // Default max-width for the image slider to the screen width
-        sliderWidth = screen.width;
-        $el.css({ 'max-width': sliderWidth + 'px'});
+        $el.css({ 'max-width': '100%'});
       }
-
-      // Set Slider Width
-      //==================
-      // $el.css({ 'max-width': sliderWidth + 'px'});
 
       // Set Slider height
       //===================
       var sliderHeight = sliderWidth * aspectRatio;
-      console.log(sliderHeight);
+      // console.log(sliderHeight);
       $el.css({'height': sliderHeight + 'px'});
 
 
@@ -273,22 +266,19 @@ $el[find_something]('img');
       var currentSliderHeight = null;
       $(window).resize(function() {
         // ========================================
-        if ($(document).width() <= options.max_slider_width) {
+        var breakpointTest = $(document).width() <= options.max_slider_width;
+        console.log(breakpointTest);
+        if (breakpointTest) {
           if (aspectRatio > 1) {
             currentSliderHeight = (($el.width() * aspectRatio) / 2);
-            console.log('Slider Height: ' + currentSliderHeight + 'px');
+            // console.log('Slider Height: ' + currentSliderHeight + 'px');
           } else {
             currentSliderHeight = $el.width() * aspectRatio;
-            console.log('Slider Height: ' + currentSliderHeight + 'px');
+            // console.log('Slider Height: ' + currentSliderHeight + 'px');
           }
-         $el.css({'height': sliderHeight + 'px'});
-          console.log('==============================');
+         $el.css({'height': currentSliderHeight + 'px'});
+          // console.log('==============================');
         }
-        // ========================================
-        // if (options.max_slider_width === null) {
-        //   console.log('max_slider_width not set');
-        //
-        // }
       });
 
       return $el;
@@ -319,15 +309,16 @@ $el[find_something]('img');
       return $el;
     }, //END METHOD next_image
 
-    // ====================
+    // ========================
     // PREVIOUS IMAGE FUNCTION
-    // ====================
+    // ========================
     previous_image: function() {
 
       var $el = $(this),
         // Retrieve data stored on element
         options = $el.data(data_key);
-      // console.log('Previous Image function FIRED!!');
+
+      $el.children('[data-order="' + options.currentSlide + '"]').removeClass('v_active');
 
       // Decrement options.currentSlide
       if (options.currentSlide > 1 && options.currentSlide <= options.numberOfSlides) {
@@ -336,7 +327,8 @@ $el[find_something]('img');
         options.currentSlide = options.numberOfSlides;
       }
 
-        // console.log('options.currentSlide: ' + options.currentSlide);
+      $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
+
 
       return $el;
     }
