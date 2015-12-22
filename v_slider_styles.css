@@ -9,9 +9,40 @@
 	min-height: 100px;
 	max-width: 100%;
 	overflow: hidden;
-	/*background: #f9f9f9;*/
 }
 
+/*-- Clearing images in V SLIDER --*/
+.v_slider:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.v_slider img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	max-width: 100%;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	opacity: 0;
+	-webkit-transition: opacity 0.5s;
+	-moz-transition: opacity 0.5s;
+	-ms-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.v_slider img.v_active {
+	opacity: 1;
+}
+
+.v_slider img.narrow {
+	width: 50%;
+}
 
 /*-------LINKS-------*/
 .v_slider_links {
@@ -44,33 +75,8 @@
 }
 
 .v_slider_links a:hover {
-	
+
 }
-
-/*-------VSLIDER SLIDER IMAGE CONTAINER-------*/
-.v_slider_container {
-	position: relative;
-	min-height: 100px;
-}
-
-.v_slider_image {
-	position: absolute;
-	top: 0;
-	left: 0;
-
-	/*SET OPACITY: 0; FOR ALL SLIDES*/
-	 -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
-	filter: alpha(opacity=0); /* IE 5-7 */
-	-moz-opacity: 0; /* Netscape */	
-	-khtml-opacity: 0; /* Safari 1.x */
-	opacity: 0; /* Good browsers */
-
-
-	float: left;
-}
-
-.v_slider_container .i1 { display: block; }
-
 
 
 /*-------V SLIDER CONTROLS-------*/
@@ -109,14 +115,6 @@
 	opacity: 0.9;
 }
 
-/*-------V SLIDER CLEAR RULE-------*/
-.v_slider_clear {
-	clear: both;
-}
-
 /*===========================================
 		END v_slider PLUGIN STYLES
 ===========================================*/
-
-
-

@@ -1,101 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>V-Slider</title>
 	<link rel="stylesheet" href="v_slider_styles.css">
 </head>
+
 <body>
-	
-	<div class="v_slider my-slider">
-		<div class="v_slider_links">
-			<!-- Add links with text to have a button link show up on the slider with each slide
-			<a href="http://www.example.com">www.example.com</a>
-			<a href="http://www.example.com">www.example.com</a>
-			<a href="http://www.example.com">www.example.com</a>
-			<a href="http://www.example.com">www.example.com</a>
-			<a href="http://www.example.com">www.example.com</a>
-			<a href="http://www.example.com">www.example.com</a>
-			<a href="http://www.example.com">www.example.com</a> -->
-
-			<!-- Remove the text from the links and add (full_width_links : true) to your main.js file to make the links full width.
-			<a href="http://www.example.com"></a>
-			<a href="http://www.example.com"></a>
-			<a href="http://www.example.com"></a>
-			<a href="http://www.example.com"></a>
-			<a href="http://www.example.com"></a>
-			<a href="http://www.example.com"></a>
-			<a href="http://www.example.com"></a> -->
-		</div>
-		<div class="v_slider_container">
-			<img src="v-images/elk.jpg">
-			<img src="v-images/river-valley.jpeg">
-			<img src="v-images/house.jpg">
-			<img src="v-images/hyder.jpg">
-			<img src="v-images/trout2.jpg">
-			<img src="v-images/valley3.jpg">
-			<div class="v_slider_clear"></div>
-		</div>
-		<div class="v_slider_controls">
-			<div class="v_slider_back_button">
-				<img src="images/v-slider-left-arrow.png">
-			</div>
-			<div class="v_slider_next_button">
-				<img src="images/v-slider-right-arrow.png">
-			</div>
-		<div class="v_slider_clear"></div>
-		</div>
+	<!-- Version 2.0 -->
+	<div class="v_slider hero">
+		<img src="v-images/elk.jpg" data-link="http://isaacv.net?t=elk">
+		<img src="v-images/river-valley.jpeg" data-link="http://isaacv.net?t=river">
+		<img src="v-images/house.jpg" data-link="http://isaacv.net?t=house">
+		<img src="v-images/hyder.jpg" data-link="http://isaacv.net?t=hyder">
 	</div>
-	
-	<div class="v_slider v11">
-		<div class="v_slider_links">
-			<a href="http://www.google.com"></a>
-			<a href="http://www.clockwork.net"></a>
-			<a href="http://www.isaacv.net"></a>
-			<a href="http://www.jakeandersonphoto.com/blog"></a>
-			<a href="http://www.trinity-studios.com"></a>
-		</div>
-		<div class="v_slider_container">
-			<img src="images/lake2.png">
-			<img src="images/lake.png">
-			<img src="images/lake1.png">
-			<img src="images/lake3.png">
-			<img src="v-images/room.png">
-			<div class="v_slider_clear"></div>
-		</div>
-		<div class="v_slider_controls">
-			<div class="v_slider_back_button">
-				<img src="images/v-slider-left-arrow.png">
-			</div>
-			<div class="v_slider_next_button">
-				<img src="images/v-slider-right-arrow.png">
-			</div>
-		<div class="v_slider_clear"></div>
-		</div>
-	</div>
-
 
 	<script src="jquery-1.10.2.js"></script>
 	<script src="v_slider.js"></script>
 	<script type="text/javascript">
-		$('.my-slider').v_slider({
-			speed                           : 3000, //Speed of slides (4000 = 4s)
-            transition_speed                : 700, //Speed of transition between slides
-            paused                          : false, //Change to true if you dont want the slider to start on load
-            // full_width_links             : true,
-            // max_slider_width        : 700, // Set this equal to the size of the parent elements max width
-            // fixed_container_height          : 250, // Only good if you're using images with specific heights
+		$('.hero').v_slider({
+			// max_slider_width : 600,
 		});
-
-		$('.v11').v_slider({
-			speed                           : 4000, //Speed of slides (4000 = 4s)
-            transition_speed                : 1000, //Speed of transition between slides
-            paused                          : false, //Change to true if you dont want the slider to start on load
-            full_width_links             	: true,
-            // max_slider_width        : 700, // Set this equal to the size of the parent elements max width
-            // fixed_container_height          : 250, // Only good if you're using images with specific heights
-		});
-            
 	</script>
 </body>
+
 </html>
