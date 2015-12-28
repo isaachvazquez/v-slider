@@ -61,6 +61,7 @@ $el[find_something]('img');
           slider_width_percent: 100, //Default Container Width
           full_width_links: false,
           max_slider_width: 1400,
+          logging: false
         }, settings);
 
       //Plugin Variables
@@ -68,18 +69,21 @@ $el[find_something]('img');
       options.slider = $el;
       options.numberOfSlides = $el.children(options.slide_selector).length;
       options.currentSlide = 1;
-      options.linkContainer = $el.find('' + class_prefix + 'links');
-      options.numberOfLinks = $el.find('' + class_prefix + 'links').children('a').length; //Get the number of slides on the page.
+      // options.linkContainer = $el.find('' + class_prefix + 'links');
+      // options.numberOfLinks = $el.find('' + class_prefix + 'links').children('a').length; //Get the number of slides on the page.
 
-      console.log('Number of Slides: ', options.numberOfSlides);
-      console.log('Number of Links: ' + options.numberOfLinks);
+      if(options.logging){
+        // console.log('Number of Links: ' + options.numberOfLinks);
+      }
 
       // Store data on the element for use later
       $el.data(data_key, options);
 
       //Initialize and Create all the plugin elements
       //===============================================
-      console.log('==Initiallized==');
+      if(options.logging){
+        console.log('==Initiallized==');
+      }
       methods._create_plugin_elements.apply(this);
 
 
@@ -152,9 +156,10 @@ $el[find_something]('img');
         hasLandscapeImages = false, // boolean value
         sliderWidth = $el.width(); // Needs to be slider width
 
-      console.log('Screen Width: ' + sliderWidth);
-      console.log('V Slider Width: ' + sliderWidth);
-
+      if(options.logging){
+        console.log('Screen Width: ' + sliderWidth);
+        console.log('V Slider Width: ' + sliderWidth);
+      }
       var imageIndex = 1;
       //Display first image in slider. (i.e. set opacity to 1)
       $el.children('img:nth-child(' + imageIndex + ')').addClass('v_active');
@@ -192,10 +197,11 @@ $el[find_something]('img');
           tallestLandscapeImageHeight = imageHeight;
           tallestLandscapeImageWidth = imageWidth;
 
-          // Prints tallest image file name
-          // console.log(currentImage.attr('src'));
-          // console.log('Tallest Landscape Image Dimensions: ' + tallestLandscapeImageHeight + ' x ' + tallestLandscapeImageWidth);
-
+          if(options.logging){
+            // Prints tallest image file name
+            console.log('==================\n' + currentImage.attr('src'));
+            console.log('Tallest Landscape Image Dimensions: ' + tallestLandscapeImageHeight + ' x ' + tallestLandscapeImageWidth);
+          }
           // Flag for later use
           hasLandscapeImages = true;
         }
@@ -206,9 +212,11 @@ $el[find_something]('img');
           tallestPortraitImageHeight = imageHeight;
           tallestPortraitImageWidth = imageWidth;
 
-          // Prints tallest image file name
-          // console.log(currentImage.attr('src'));
-          // console.log('Tallest Portrait Image Dimensions: ' + tallestPortraitImageHeight + ' x ' + tallestPortraitImageWidth);
+          if(options.logging){
+            // Prints tallest image file name
+            console.log('==================\n' + currentImage.attr('src'));
+            console.log('Tallest Portrait Image Dimensions: ' + tallestPortraitImageHeight + ' x ' + tallestPortraitImageWidth);
+          }
 
           // Flag for later use
           hasPortraitImages = true;
@@ -220,16 +228,23 @@ $el[find_something]('img');
           // This covers if there are only Portrait Oriented Images
           aspectRatio = tallestPortraitImageHeight / tallestPortraitImageWidth;
           sliderHeight = ((sliderWidth * aspectRatio) / 2);
-          // console.log('Slider Height: ' + sliderHeight + 'px');
+          if(options.logging){
+            console.log('Slider Height: ' + sliderHeight + 'px');
+          }
         } else {
           // This covers all other combinations
           aspectRatio = tallestLandscapeImageHeight / tallestLandscapeImageWidth;
           sliderHeight = sliderWidth * aspectRatio;
-          // console.log('Slider Height: ' + sliderHeight + 'px');
+          if(options.logging){
+            console.log('Slider Height: ' + sliderHeight + 'px');
+          }
         }
-        console.log('Aspect Ratio: ' + aspectRatio);
 
-        console.log('i: ' + i + ', imageIndex: ' + imageIndex);
+        if(options.logging){
+          console.log('Aspect Ratio: ' + aspectRatio);
+          console.log('i: ' + i + ', imageIndex: ' + imageIndex);
+        }
+
         imageIndex++;
       } // End For Loop (Looping through images to get heights)
 
@@ -253,7 +268,9 @@ $el[find_something]('img');
       // Set Slider height
       //===================
       var sliderHeight = sliderWidth * aspectRatio;
-      // console.log(sliderHeight);
+      if(options.logging){
+        console.log(sliderHeight);
+      }
       $el.css({'height': sliderHeight + 'px'});
 
 
@@ -267,17 +284,25 @@ $el[find_something]('img');
       $(window).resize(function() {
         // ========================================
         var breakpointTest = $(document).width() <= options.max_slider_width;
-        console.log(breakpointTest);
+        if(options.logging){
+          console.log(breakpointTest);
+        }
         if (breakpointTest) {
           if (aspectRatio > 1) {
             currentSliderHeight = (($el.width() * aspectRatio) / 2);
-            // console.log('Slider Height: ' + currentSliderHeight + 'px');
+            if(options.logging){
+              console.log('Slider Height: ' + currentSliderHeight + 'px');
+            }
           } else {
             currentSliderHeight = $el.width() * aspectRatio;
-            // console.log('Slider Height: ' + currentSliderHeight + 'px');
+            if(options.logging){
+              console.log('Slider Height: ' + currentSliderHeight + 'px');
+            }
           }
          $el.css({'height': currentSliderHeight + 'px'});
-          // console.log('==============================');
+         if(options.logging){
+           console.log('==============================');
+         }
         }
       });
 
@@ -304,7 +329,9 @@ $el[find_something]('img');
 
       $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
 
-      // console.log('options.currentSlide: ' + options.currentSlide);
+      if(options.logging){
+        console.log('options.currentSlide: ' + options.currentSlide);
+      }
 
       return $el;
     }, //END METHOD next_image
@@ -329,6 +356,9 @@ $el[find_something]('img');
 
       $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
 
+      if(options.logging){
+        console.log('options.currentSlide: ' + options.currentSlide);
+      }
 
       return $el;
     }
