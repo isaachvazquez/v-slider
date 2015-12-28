@@ -54,7 +54,7 @@ $el[find_something]('img');
         options = $.extend({
           slide_selector: 'img',
           speed: 5000, //Default slide duration
-          transition_speed: 1000, //Default transition speed
+          transition_speed: 0.5, //Default transition speed
           paused: false, //Auto Play on page load
           fixed_container_height: null, //Change to specified px if you want a fixed height. Non responsive
           slider_width_px: null, //Default null so slider defaults with 100% and fits it's containing element. Non responsive
@@ -64,9 +64,7 @@ $el[find_something]('img');
           logging: false
         }, settings);
 
-      //Plugin Variables
-      options.elements = '';
-      options.slider = $el;
+      // Locally Scoped Variables. (Not accessible via instantiation)
       options.numberOfSlides = $el.children(options.slide_selector).length;
       options.currentSlide = 1;
       // options.linkContainer = $el.find('' + class_prefix + 'links');
@@ -85,7 +83,6 @@ $el[find_something]('img');
         console.log('==Initiallized==');
       }
       methods._create_plugin_elements.apply(this);
-
 
       // Begin Timer
       //=============
@@ -122,6 +119,14 @@ $el[find_something]('img');
 
       // ADD CLASS v_slider_image TO ALL IMAGES WITHIN v_slider_container
       //==========================================================================
+
+
+      // Set the transition specified
+      $('.v_slider img').css({
+        '-webkit-transition-duration': options.transition_speed + 's',
+        'transition-duration': options.transition_speed + 's'
+      });
+
 
       // Create CONTROLS
       //==================
