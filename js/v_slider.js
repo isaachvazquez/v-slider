@@ -20,14 +20,10 @@ responsive for all image sizes and orientations.
 -----------------------------------------------------------------------------
 
 **Notes**
-
-Change all selectors to hav $el.find in front
-fix all options. variables
-
-
-var find_something = 'find';
-$el[find_something]('img');
-
+Any event handlers should follow the pattern:
+=> $el.on('eventName', 'selector', function(){});
+instead of,
+=> $(body).on('eventName', 'selector', function(){});
 
 ==========================================================================*/
 (function($) {
