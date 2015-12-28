@@ -100,7 +100,7 @@ $el[find_something]('img');
 
       // Click events
       //==============
-      $('body').on('click', '.v_slider_controls a', function(e) {
+      $el.on('click', '.v_slider_controls a', function(e) {
         var action = $(this).attr('data-action');
         window.clearInterval(v_slider_timer);
         if(action === 'next'){
