@@ -53,15 +53,16 @@ $el[find_something]('img');
         // Options added here are defaults, if different values are passed when initiallized, these will be overridden
         options = $.extend({
           slide_selector: 'img',
-          speed: 5000, //Default slide duration
-          transition_speed: 0.5, //Default transition speed
-          paused: false, //Auto Play on page load
-          fixed_container_height: null, //Change to specified px if you want a fixed height. Non responsive
-          slider_width_px: null, //Default null so slider defaults with 100% and fits it's containing element. Non responsive
-          slider_width_percent: 100, //Default Container Width
-          full_width_links: false,
-          max_slider_width: 1400,
-          logging: false
+          speed: 5000, // Default slide duration
+          transition_speed: 0.5, // Default transition speed
+          paused: false, // Auto Play on page load
+          fixed_container_height: null, // Change to specified px if you want a fixed height. Non responsive
+          slider_width_px: null, // Default null so slider defaults with 100% and fits it's containing element. Non responsive
+          slider_width_percent: 100, // Default Container Width
+          full_width_links: false, // TODO: Not in use currently.
+          max_slider_width: 1400, // Sets a max-width on the slider (pixels only right now, add % later)
+          controls: true, // TODO: Eventually will allow overriding controls.
+          logging: false // Tells the plugin to either print console.logs or not.
         }, settings);
 
       // Locally Scoped Variables. (Not accessible via instantiation)
@@ -117,11 +118,9 @@ $el[find_something]('img');
         // Retrieve data stored on element
         options = $el.data(data_key);
 
-      // ADD CLASS v_slider_image TO ALL IMAGES WITHIN v_slider_container
-      //==========================================================================
-
 
       // Set the transition specified
+      //==============================
       $('.v_slider img').css({
         '-webkit-transition-duration': options.transition_speed + 's',
         'transition-duration': options.transition_speed + 's'
@@ -130,14 +129,10 @@ $el[find_something]('img');
 
       // Create CONTROLS
       //==================
-      // <div class="v_slider_controls">
-      //   <a href="#" data-action="previous">
-  		// 	 <img src="images/v-slider-left-arrow.png">
-  		//   </a>
-  		//   <a href="#" data-action="next">
-  		// 		<img src="images/v-slider-right-arrow.png">
-  		// 	</a>
-  		// </div>
+
+      if(options.controls){
+        // add in the controls for each v_slider
+      }
 
 
       // SET LINK STYLES
