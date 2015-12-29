@@ -64,10 +64,10 @@ instead of,
 
       if(options.logging){
         console.log('[== Plugin Options ==]')
-        console.log('=> speed------------>: ' + options.speed);
-        console.log('=> transition_speed->: ' + options.transition_speed);
-        console.log('=> paused----------->: ' + options.paused);
-        console.log('=> max_slider_width->: ' + options.max_slider_width);
+        console.log('=> speed: ' + options.speed + 'ms');
+        console.log('=> transition_speed: ' + options.transition_speed + 's');
+        console.log('=> paused: ' + options.paused);
+        console.log('=> max_slider_width: ' + options.max_slider_width + 'px');
         // console.log('=> : ' + options.);
         console.log('==============================');
       }
