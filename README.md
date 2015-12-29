@@ -1,5 +1,6 @@
 # v-slider
-Work in Progress
+
+Work in progress.
 
 ### Requirements
 * jQuery 1.10.2
@@ -30,7 +31,7 @@ Add the below HTML to any container you wish to add the v_slider to
 #### CSS
 
 
-Add the v_slider stylesheet to the <head></head> section of your html file above your custom stylesheets.
+Add the v_slider stylesheet to the head section of your html file above your custom stylesheets.
 
 	<link rel="stylesheet" href="path/to/v_slider_styles.css">
 
@@ -44,7 +45,7 @@ and above your main javascript file.
 	<script>
 		// Most basic usage
 		$('.slider-name').v_slider();
-		
+
 		// Using plugin options
 		$('.slider-name').v_slider({
 			max_slider_width: 600,
@@ -57,6 +58,7 @@ and above your main javascript file.
 ## TODO:
 * Ability for linkable slides (Full width & buttons).
 * Ability to add custom control arrows.
+* Ability to have button controls like sportsmenforgod.org.
 * Update Requirements section with all necessary & correct requirements.
 * Figure out list of compatible browsers & devices.
 * Instructions for
@@ -65,4 +67,3 @@ and above your main javascript file.
 		* Slider appearance
 		* etc
 * ...
-
