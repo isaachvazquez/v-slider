@@ -56,7 +56,7 @@ instead of,
           slider_width_px: null, // Default null so slider defaults with 100% and fits it's containing element. Non responsive
           slider_width_percent: 100, // Default Container Width
           full_width_links: false, // TODO: Not in use currently.
-          max_slider_width: 1400, // Sets a max-width on the slider (pixels only right now, add % later)
+          max_slider_width: 2400, // Sets a max-width on the slider (pixels only right now, add % later)
           controls: true, // TODO: Eventually will allow overriding controls.
           dev: false, // Tells the plugin to log dev information to the console or not.
           logging: false // Tells the plugin to print the plugin options in use.
@@ -106,6 +106,7 @@ instead of,
       // Click events
       //==============
       $el.on('click', '.v_slider_controls a', function(e) {
+        e.preventDefault();
         var action = $(this).attr('data-action');
         window.clearInterval(v_slider_timer);
         if(action === 'next'){
@@ -128,7 +129,7 @@ instead of,
 
       // Set the transition specified
       //==============================
-      $('.v_slider img').css({
+      $el.children('img').css({
         '-webkit-transition-duration': options.transition_speed + 's',
         'transition-duration': options.transition_speed + 's'
       });
