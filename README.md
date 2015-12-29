@@ -1,7 +1,6 @@
 # v-slider
 Unfinished.
 
-
 ### Requirements
 * jQuery
 
@@ -57,4 +56,28 @@ Add the v_slider js file to your html just above the closing body tag
 and above your main javascript file.
 
 	<script src="path/to/v_slider.js"></script>
-</body>
+	<script>
+		// Most basic usage
+		$('.slider-name').v_slider();
+		
+		// Using plugin options
+		$('.slider-name').v_slider({
+			max_slider_width: 600,
+			logging: true,
+			paused: true
+		});
+	</script>
+
+
+## TODO:
+* Ability for linkable slides (Full width & buttons).
+* Ability to add custom control arrows.
+* Update Requirements section with all necessary & correct requirements.
+* Figure out list of compatible browsers & devices.
+* Instructions for
+	* Overriding/Customizing css:
+		* Buttons
+		* Slider appearance
+		* etc
+* ...
+

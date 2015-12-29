@@ -31,8 +31,8 @@ instead of,
 
   // These locally scoped variables help minification by aliasing strings
   var data_key = 'v_slider_options', // Namespace plugin data
-    event_suffix = '.v_slider_', // Namspace events
-    class_prefix = '.v_slider-', // Namspace events
+    event_suffix = '-v_slider', // Namspace events
+    class_prefix = '.v_slider-', // Namspace css classes
 
 
     // Custom events
@@ -58,8 +58,19 @@ instead of,
           full_width_links: false, // TODO: Not in use currently.
           max_slider_width: 1400, // Sets a max-width on the slider (pixels only right now, add % later)
           controls: true, // TODO: Eventually will allow overriding controls.
-          logging: false // Tells the plugin to either print console.logs or not.
+          dev: false, // Tells the plugin to log dev information to the console or not.
+          logging: false // Tells the plugin to print the plugin options in use.
         }, settings);
+
+      if(options.logging){
+        console.log('[== Plugin Options ==]')
+        console.log('=> speed------------>: ' + options.speed);
+        console.log('=> transition_speed->: ' + options.transition_speed);
+        console.log('=> paused----------->: ' + options.paused);
+        console.log('=> max_slider_width->: ' + options.max_slider_width);
+        // console.log('=> : ' + options.);
+        console.log('==============================');
+      }
 
       // Locally Scoped Variables. (Not accessible via instantiation)
       options.numberOfSlides = $el.children(options.slide_selector).length;
@@ -67,7 +78,7 @@ instead of,
       // options.linkContainer = $el.find('' + class_prefix + 'links');
       // options.numberOfLinks = $el.find('' + class_prefix + 'links').children('a').length; //Get the number of slides on the page.
 
-      if(options.logging){
+      if(options.dev){
         // console.log('Number of Links: ' + options.numberOfLinks);
       }
 
@@ -76,8 +87,8 @@ instead of,
 
       //Initialize and Create all the plugin elements
       //===============================================
-      if(options.logging){
-        console.log('==Initiallized==');
+      if(options.dev){
+        console.log('[== Initiallized ==]');
       }
       methods._create_plugin_elements.apply(this);
 
@@ -152,8 +163,8 @@ instead of,
         hasLandscapeImages = false, // boolean value
         sliderWidth = $el.width(); // Needs to be slider width
 
-      if(options.logging){
-        console.log('[Printing Container Widths]');
+      if(options.dev){
+        console.log('[== Printing Container Widths ==]');
         console.log('Screen Width: ' + sliderWidth);
         console.log('V Slider Width: ' + sliderWidth);
         console.log('=============================');
@@ -166,7 +177,10 @@ instead of,
       //=============================================================
       //=============================================================
       //=============================================================
-      console.log('[Finding largest Image]');
+      if(options.dev){
+        console.log('[== Finding largest Image ==]');
+      }
+
       for (var i = 0; i < options.numberOfSlides; i++) {
         $el.children('img:nth-child(' + imageIndex + ')').attr('data-order', imageIndex).attr('id', 'v-' + imageIndex);
 
@@ -196,7 +210,7 @@ instead of,
           tallestLandscapeImageHeight = imageHeight;
           tallestLandscapeImageWidth = imageWidth;
 
-          if(options.logging){
+          if(options.dev){
             // Prints tallest image file name
             console.log(currentImage.attr('src'));
             console.log('Tallest Landscape Image Dimensions: ' + tallestLandscapeImageHeight + ' x ' + tallestLandscapeImageWidth);
@@ -211,7 +225,7 @@ instead of,
           tallestPortraitImageHeight = imageHeight;
           tallestPortraitImageWidth = imageWidth;
 
-          if(options.logging){
+          if(options.dev){
             // Prints tallest image file name
             console.log(currentImage.attr('src'));
             console.log('Tallest Portrait Image Dimensions: ' + tallestPortraitImageHeight + ' x ' + tallestPortraitImageWidth);
@@ -237,8 +251,8 @@ instead of,
       } // End For Loop (Looping through images to get heights)
 
       // Print results from largest image test
-      if(options.logging){
-        console.log('[Printing Largest Image Aspect Ration & Height]');
+      if(options.dev){
+        console.log('[== Printing Largest Image Aspect Ration & Height ==]');
         console.log('Aspect Ratio: ' + aspectRatio);
         console.log('----------------------------');
       }
@@ -259,16 +273,16 @@ instead of,
         $el.css({ 'max-width': '100%'});
       }
 
-      if(options.logging){
-        console.log('[Setting Slider Width]');
+      if(options.dev){
+        console.log('[== Setting Slider Width ==]');
         console.log('Slider Width: ' + sliderWidth);
       }
 
       // Set Slider height
       //===================
       var sliderHeight = sliderWidth * aspectRatio;
-      if(options.logging){
-        console.log('[Setting Slider Height]');
+      if(options.dev){
+        console.log('[== Setting Slider Height ==]');
         console.log('Slider Height: ' + sliderHeight);
       }
       $el.css({'height': sliderHeight + 'px'});
@@ -284,31 +298,33 @@ instead of,
       $(window).resize(function() {
         // ========================================
         var breakpointTest = $(document).width() <= options.max_slider_width;
-        if(options.logging){
+        if(options.dev){
           console.log(breakpointTest);
         }
         if (breakpointTest) {
           if (aspectRatio > 1) {
             currentSliderHeight = (($el.width() * aspectRatio) / 2);
-            if(options.logging){
+            if(options.dev){
               console.log('Slider Height: ' + currentSliderHeight + 'px');
             }
           } else {
             currentSliderHeight = $el.width() * aspectRatio;
-            if(options.logging){
+            if(options.dev){
               console.log('Slider Height: ' + currentSliderHeight + 'px');
             }
           }
          $el.css({'height': currentSliderHeight + 'px'});
-         if(options.logging){
+         if(options.dev){
            console.log('==============================');
          }
         }
       });
 
-      console.log('=============================================================');
-      console.log('END OF SLIDER INIT');
-      console.log('=============================================================');
+      if(options.dev){
+        console.log('=============================================================');
+        console.log('END OF SLIDER INIT');
+        console.log('=============================================================');
+      }
 
       return $el;
     }, // END METHOD _create_plugin_elements
@@ -333,7 +349,7 @@ instead of,
 
       $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
 
-      if(options.logging){
+      if(options.dev){
         console.log('options.currentSlide: ' + options.currentSlide);
       }
 
@@ -360,7 +376,7 @@ instead of,
 
       $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
 
-      if(options.logging){
+      if(options.dev){
         console.log('options.currentSlide: ' + options.currentSlide);
       }
 
