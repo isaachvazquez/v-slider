@@ -146,15 +146,17 @@ instead of,
         tallestPortraitImageWidth = 0,
         tallestLandscapeImageHeight = 0,
         tallestLandscapeImageWidth = 0,
-        sliderHeight = null,
-        aspectRatio = null,
+        sliderHeight = 0,
+        aspectRatio = 0,
         hasPortraitImages = false, // boolean value
         hasLandscapeImages = false, // boolean value
         sliderWidth = $el.width(); // Needs to be slider width
 
       if(options.logging){
+        console.log('[Printing Container Widths]');
         console.log('Screen Width: ' + sliderWidth);
         console.log('V Slider Width: ' + sliderWidth);
+        console.log('=============================');
       }
       var imageIndex = 1;
       //Display first image in slider. (i.e. set opacity to 1)
@@ -164,18 +166,19 @@ instead of,
       //=============================================================
       //=============================================================
       //=============================================================
+      console.log('[Finding largest Image]');
       for (var i = 0; i < options.numberOfSlides; i++) {
-        $el.children('img:nth-child(' + imageIndex + ')').attr('data-order', imageIndex);
+        $el.children('img:nth-child(' + imageIndex + ')').attr('data-order', imageIndex).attr('id', 'v-' + imageIndex);
 
         //Check image size, and addClass('narrow')
         // Get on screen image
         //==========================================================================================
         var currentImage = $el.children('img:nth-child(' + imageIndex + ')');
+        var currentImageObject = document.getElementById('v-' + imageIndex);
 
         // Get accurate measurements from that.
-        var imageWidth = currentImage.width(),
-          imageHeight = currentImage.height();
-
+        var imageWidth = currentImageObject.width,
+          imageHeight = currentImageObject.height;
 
         // Portrait/Landscape Test
         //=========================
@@ -195,7 +198,7 @@ instead of,
 
           if(options.logging){
             // Prints tallest image file name
-            console.log('==================\n' + currentImage.attr('src'));
+            console.log(currentImage.attr('src'));
             console.log('Tallest Landscape Image Dimensions: ' + tallestLandscapeImageHeight + ' x ' + tallestLandscapeImageWidth);
           }
           // Flag for later use
@@ -210,7 +213,7 @@ instead of,
 
           if(options.logging){
             // Prints tallest image file name
-            console.log('==================\n' + currentImage.attr('src'));
+            console.log(currentImage.attr('src'));
             console.log('Tallest Portrait Image Dimensions: ' + tallestPortraitImageHeight + ' x ' + tallestPortraitImageWidth);
           }
 
@@ -224,26 +227,21 @@ instead of,
           // This covers if there are only Portrait Oriented Images
           aspectRatio = tallestPortraitImageHeight / tallestPortraitImageWidth;
           sliderHeight = ((sliderWidth * aspectRatio) / 2);
-          if(options.logging){
-            console.log('Slider Height: ' + sliderHeight + 'px');
-          }
         } else {
           // This covers all other combinations
           aspectRatio = tallestLandscapeImageHeight / tallestLandscapeImageWidth;
           sliderHeight = sliderWidth * aspectRatio;
-          if(options.logging){
-            console.log('Slider Height: ' + sliderHeight + 'px');
-          }
-        }
-
-        if(options.logging){
-          console.log('Aspect Ratio: ' + aspectRatio);
-          console.log('i: ' + i + ', imageIndex: ' + imageIndex);
         }
 
         imageIndex++;
       } // End For Loop (Looping through images to get heights)
 
+      // Print results from largest image test
+      if(options.logging){
+        console.log('[Printing Largest Image Aspect Ration & Height]');
+        console.log('Aspect Ratio: ' + aspectRatio);
+        console.log('----------------------------');
+      }
 
       //=============================================================
       //=============================================================
@@ -261,11 +259,17 @@ instead of,
         $el.css({ 'max-width': '100%'});
       }
 
+      if(options.logging){
+        console.log('[Setting Slider Width]');
+        console.log('Slider Width: ' + sliderWidth);
+      }
+
       // Set Slider height
       //===================
       var sliderHeight = sliderWidth * aspectRatio;
       if(options.logging){
-        console.log(sliderHeight);
+        console.log('[Setting Slider Height]');
+        console.log('Slider Height: ' + sliderHeight);
       }
       $el.css({'height': sliderHeight + 'px'});
 
@@ -301,6 +305,10 @@ instead of,
          }
         }
       });
+
+      console.log('=============================================================');
+      console.log('END OF SLIDER INIT');
+      console.log('=============================================================');
 
       return $el;
     }, // END METHOD _create_plugin_elements
