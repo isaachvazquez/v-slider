@@ -2,11 +2,13 @@
 			v_slider PLUGIN STYLES
 ===========================================*/
 
-/*-------V SLIDER (MAIN CONTAINER)-------*/
+/* V SLIDER (MAIN CONTAINER)
+============================= */
 .v_slider {
 	position: relative;
 	margin: 0 auto;
 	min-height: 100px;
+	width: 100%;
 	max-width: 100%;
 	overflow: hidden;
 }
@@ -22,6 +24,7 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	width: 100%;
 	max-width: 100%;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	opacity: 0;
@@ -37,6 +40,7 @@
 }
 
 .v_slider img.v_active {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 	opacity: 1;
 }
 
@@ -44,7 +48,8 @@
 	width: 50%;
 }
 
-/*-------LINKS-------*/
+/* LINKS
+============================= */
 .v_slider_links {
 	position: absolute;
 	top: 3%;
@@ -79,19 +84,24 @@
 }
 
 
-/*-------V SLIDER CONTROLS-------*/
+/* V SLIDER CONTROLS
+============================= */
 .v_slider_controls {
 	display: none;
 	position: absolute;
 	top: 50%;
 	left: 0;
+	z-index: 99;
 	margin: -25px 0 0 0;
 	width: 100%;
 	height: 50px;
 }
 
 .v_slider_controls img {
+	position: relative;
 	width: 50px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	opacity: 1;
 }
 
 .v_slider:hover .v_slider_controls {
@@ -99,6 +109,7 @@
 }
 
 .v_slider_next_button, .v_slider_back_button {
+	display: block;
 	width: 50px;
 	height: 50px;
 	cursor: pointer;

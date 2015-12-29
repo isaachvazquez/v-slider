@@ -1,16 +1,18 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie6 lteie7 lteie8 lteie9" lang="en"><![endif]-->
 <!--[if IE 7 ]><html class="ie7 lteie7 lteie8 lteie9" lang="en"><![endif]-->
 <!--[if IE 8 ]><html class="ie8 lteie8 lteie9" lang="en"><![endif]-->
 <!--[if IE 9 ]><html class="ie9 lteie9" lang="en"><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="initial-scale=1">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="v_slider_styles.css">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="css/v_slider_styles.css">
 	<title>v_slider jQuery Plugin</title>
 	<link href='http://fonts.googleapis.com/css?family=Rajdhani:300,600' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
@@ -21,586 +23,401 @@
 
 <body>
 	<style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;
-	}
+		* {
+			box-sizing: border-box;
+		}
 
-	html, body {
-		width: 100%;
-		height: 100%;
-	}
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+		}
 
-	body {
-		font-family: 'Rajdhani', sans-serif; /*5*/
-		background: #f5f5f5;
-	}
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: 'Rajdhani', sans-serif;
+			background: #f5f5f5;
+			font-weight: bold;
+		}
 
-	#loader {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		margin: -12px 0 0 -12px;
-	}
+		#loader {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin: -12px 0 0 -12px;
+		}
 
-	.mainwrap {
-		margin: 80px auto 0 auto;
-		padding: 20px 0 10px 0;
-		width: 100%;
-		max-width: 960px;
-		/*max-width: 800px;*/
-		min-height: 100%;
-		background: #f5f5f5;
-	}
+		.mainwrap {
+			margin: 0 auto;
+			padding: 70px 0 10px 0;
+			width: 100%;
+			max-width: 800px;
+			min-height: 100%;
+			background: #f5f5f5;
+		}
 
-	a {
-		text-decoration: none;
-		color: #8ee2cf;
-		transition: 0.4s all;
-		-webkit-transition: 0.4s all;
-	}
+		a {
+			text-decoration: none;
+			color: #8D9EA5;
+			transition: 0.4s all;
+			-webkit-transition: 0.4s all;
+		}
 
-	a:hover {
-		color: #70d3bc;
-	}
+		a:hover {
+			color: #498DA9;
+		}
+		/*overriding v_slider_styles.css*/
 
-	/*overriding v_slider_styles.css*/
-	.v_slider_links a {
-		color: #8ee2cf;
-	}
+		.v_slider_links a {
+			color: #8D9EA5;
+		}
 
-	.v_slider_links a:hover {
-		color: #70d3bc;
-	}
+		.v_slider_links a:hover {
+			color: #498DA9;
+		}
 
-	p {
-		color: #969696;
-	}
+		p {
+			color: #676767;
+			font-weight: bold;
+		}
 
-	ul {
-		margin-left: 20px;
-	}
+		ul {
+			padding: 0;
+			margin-left: 20px;
+		}
 
-	li {
-		color: #969696;
-	}
+		li {
+			color: #676767;
+		}
 
-	h1, h2 {
-		font-weight: normal;
-		color: #969696;
-	}
+		h1, h2 , h3, h4, h5, h6 {
+			font-weight: bold;
+		}
 
-	h1 {  }
-	h2 {  }
-	h3 {  }
-	h4 {  }
-	h5 {  }
-	h6 {  }
+		h1,
+		h2 {
+			/*font-weight: normal;*/
+			color: #676767;
+		}
 
-	hr {
-		margin: 1px 0 5px 0;
-		border: none;
-		outline: none;
-		height: 1px;
-		background: #e6e6e6;
-		color: #e6e6e6;
-	}
+		hr {
+			margin: 1px 0 5px 0;
+			border: none;
+			outline: none;
+			height: 1px;
+			background: #e6e6e6;
+			color: #e6e6e6;
+		}
 
-	.wrapper {
-		margin: 20px auto;
-		max-width: 300px;
-		height: 100px;
-	}
+		header {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 9999999;
+			padding: 10px;
+			width: 100%;
+			min-height: 25px;
+			background: #fff;
+			border-bottom: 2px solid #e6e6e6;
+		}
 
-	header {
-		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 9999999;
-		padding: 26px 0 0 0;
-		width: 100%;
-		height: 54px;
-		background: #fff;
-		border-bottom: 2px solid #e6e6e6;
-	}
+		header h1 {
+			margin: 0;
+			font-size: 28px;
+			line-height: 28px;
+			text-align: center;
+			color: #8D9EA5;
+		}
 
-	header h1 {
-		font-size: 28px;
-		text-align: center;
-		color: #8ee2cf;
-	}
+		nav {
+			position: fixed;
+			top: -110%;
+			/*Used to hide the extra padding*/
+			left: 0;
+			/*z-index: 99999998;*/
+			z-index: 9999998;
+			/*padding: 26px 0 0 0;*/
+			width: 100%;
+			/*height: 54px;*/
+			height: 100%;
+			background: #f5f5f5;
+			border-bottom: 2px solid #e6e6e6;
+		}
 
-	nav {
-		/*position: fixed;
-		top: 0;
-		left: 100%;
-		z-index: 99999999;
-		padding: 26px 0 0 0;
-		width: 100%;
-		height: 54px;
-		background: #3a3a3a;
-		border-bottom: 2px solid #2d2d2d;*/
-		position: fixed;
-		top: -110%; /*Used to hide the extra padding*/
-		left: 0;
-		/*z-index: 99999998;*/
-		z-index: 9999998;
-		/*padding: 26px 0 0 0;*/
-		width: 100%;
-		/*height: 54px;*/
-		height: 100%;
-		background: #f5f5f5;
-		border-bottom: 2px solid #e6e6e6;
-	}
+		nav h1 {
+			font-size: 28px;
+			text-align: center;
+			color: #8D9EA5;
+		}
 
-	nav h1 {
-		font-size: 28px;
-		text-align: center;
-		color: #8ee2cf;
-	}
+		.module {
+			background: #ffffff;
+		}
 
-	.nav-item {
-		/*position: fixed;
-		top: 0;
-		left: 100%;
-		z-index: 99999999;
-		width: 100%;
-		padding: 10px 0 0 0;
-		height: 48px;
-		background: #2d2d2d;*/
-		position: fixed;
-		top: 0;
-		left: 100%;
-		z-index: 99999999;
-		width: 100%;
-		padding: 10px 0 0 0;
-		height: 48px;
-		background: #f5f5f5;
-		border-bottom: 1px solid #e6e6e6;
-	}
+		.module h2 {
+			text-transform: uppercase;
+			font-size: 19px;
+			/*font-weight: 300;*/
+		}
 
-	.nav-item:hover {
-		/*background: #3a3a3a;*/
-		/*background: #8ee2cf;*/
-	}
-
-	.nav-item a {
-		display: block;
-		width: 100%;
-		height: 100%;
-		font-size: 28px;
-		text-align: center;
-		color: #8ee2cf;
-	}
-
-	.nav-item a:hover {
-		/*color: #ffffff;*/
-	}
-
-	.ni1 { top: 81px; }
-	.ni2 { top: 140px; }
-	.ni3 { top: 199px; }
-	.ni4 { top: 258px; }
-	.ni5 { top: 317px; }
-
-	.mobile-menu-icon {
-		position: absolute;
-		top: 25px;
-		right: 20px;
-		width: 40px;
-		height: 40px;
-		background: transparent;
-		background: url('images/mobile-menu-icon-dynamic-small-dark.png') no-repeat;
-		border-radius: 6px;
-		float: right;
-		/*display: none;*/
-		cursor: pointer;
-		transition: all 0.3s;
-		-webkit-transition: all 0.3s;
-	}
-
-	.mobile-menu-icon:hover {
-
-	}
-
-	.module {
-		background: #ffffff;
-	}
-
-	.module h2 {
-		text-transform: uppercase;
-		font-size: 19px;
-		font-weight: 300;
-	}
-
-	.col-2 {
-		margin: 2% 1%;
-		padding: 1%;
-		width: 46%;
-		min-height: 100px;
-		border-bottom: 2px solid #dadada;
-		float: left;
-	}
-
-	.about {
-		margin-left: 0;
-		width: 47%;
-	}
-
-	.features{
-		margin-right: 0;
-		width: 47%;
-	}
-
-	.feature {
-		position: relative;
-		margin-left: 0;
-		cursor: pointer;
-	
-		transition: all 0.3s;
-		-webkit-transition: all 0.3s;
-	}
-
-	.feature:hover {
-		margin-left: 5px;
-	}
-
-	.tooltip {
-		padding: 5px;
-		background: #2d2d2d;
-		color: white;
-		min-width: 50px;
-		height: 25px;
-	}
-
-	.button {
-		margin: 1% auto;
-		padding: 10px 0;
-		width: 98%;
-		background: #8ee2cf;
-		color: #ffffff;
-		text-transform: uppercase;
-		text-align: center;
-		cursor: pointer;
-		transition: all 0.3s;
-		-webkit-transition: all 0.3s;
-	}
-
-	.button a {
-		display: block;
-		color: #ffffff;
-		width: 100%;
-		height: 100%;
-		text-transform: uppercase;
-	}
-
-	.button:hover {
-		background: #70d3bc;
-	}
-
-	.code {
-		margin: 15px 10px;
-		padding: 5px;
-		width: 75%;
-		min-height: 50px;
-		background: #2d2d2d;
-		/*color: #50DDE9;*/
-		color: #8d9ea5;
-		border-left: 10px solid #444444;
-		overflow-x: scroll;
-	}
-
-	footer {
-		padding: 30px 0 0 0;
-		width: 100%;
-		height: 40px;
-		background: #3a3a3a;
-		border-top: 2px solid #e6e6e6;
-		text-align: center;
-		letter-spacing: 2px;
-	}
-
-	footer p {
-		font-size: 12px;
-		color: #e6e6e6;
-		font-weight: 300;
-	}
-
-	footer a {
-		font-weight: 300;
-		color: #8ee2cf;
-		transition: 0.4s all;
-		-webkit-transition: 0.4s all;
-	}
-
-	footer a:hover {
-		color: #70d3bc;
-		text-shadow: 0 0px 3px #ffffff;
-	}
-
-	.isaac {
-		text-transform: uppercase;
-		font-size: 12px;
-	}
-
-	.title {
-		font-weight: 300;
-	}
-
-	.emphasize {
-		font-style: italic;
-		font-weight: bold;
-		color: #8ee2cf;
-		text-transform: uppercase;
-		transition: 0.4s all;
-		-webkit-transition: 0.4s all;
-	}
-
-	.emphasize:hover {
-		
-	}
-
-	@media (max-width: 640px) {
-
-		.button {
-			margin: 1% auto;
-			padding: 1%;
-			width: 96%;
+		.col-1 {
+			margin: 2% 0;
+			padding: 15px;
+			width: 100%;
+			min-height: 100px;
+			border: 1px solid #dadada;
+			float: left;
 		}
 
 		.col-2 {
 			margin: 2% 1%;
-			padding: 1%;
-			width: 96%;
+			padding: 15px;
+			width: 48%;
+			min-height: 100px;
+			border: 1px solid #dadada;
+			float: left;
 		}
 
-	}
+		.about {
+			margin-left: 0;
+			width: 49%;
+		}
 
+		.features {
+			margin-right: 0;
+			/*width: 49%;*/
+		}
+
+		.feature {
+			position: relative;
+		}
+
+		.tooltip {
+			padding: 5px;
+			background: #2d2d2d;
+			color: white;
+			min-width: 50px;
+			height: 25px;
+		}
+
+		.code {
+			display: block;
+			margin: 15px 0;
+			padding: 5px;
+			width: 100%;
+			min-height: 50px;
+			background: #2d2d2d;
+			/*color: #50DDE9;*/
+			color: #8d9ea5;
+			border-left: 10px solid #444444;
+			overflow-x: scroll;
+		}
+
+		footer {
+			padding: 10px;
+			width: 100%;
+			min-height: 20px;
+			background: #3a3a3a;
+			border-top: 2px solid #e6e6e6;
+			text-align: center;
+			letter-spacing: 2px;
+		}
+
+		footer p {
+			font-size: 12px;
+			color: #e6e6e6;
+			font-weight: 300;
+		}
+
+		footer a {
+			font-weight: 300;
+			color: #8D9EA5;
+			transition: 0.4s all;
+			-webkit-transition: 0.4s all;
+		}
+
+		footer a:hover {
+			color: #498DA9;
+			/*text-shadow: 0 0px 3px #ffffff;*/
+		}
+
+		.isaac {
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+
+		.title {
+			font-weight: 300;
+		}
+
+		.emphasize {
+			font-style: italic;
+			font-weight: bold;
+			color: #498DA9;
+			text-transform: uppercase;
+			transition: 0.4s all;
+			-webkit-transition: 0.4s all;
+		}
+
+		code .emphasize {
+			text-transform: none;
+		}
+
+		.emphasize:hover {}
+
+		.clear {
+			clear: both;
+		}
+
+		@media (max-width: 640px) {
+			.button {
+				margin: 1% auto;
+				padding: 1%;
+				width: 96%;
+			}
+			.col-2 {
+				margin: 2% 1%;
+				padding: 1%;
+				width: 96%;
+			}
+		}
 	</style>
 
-	<!-- LOADING ANIMATION -->
-	<img src="images/loading.gif" id="loader">
-
 	<header>
-			<h1 class="title">V SLIDER</h1>
-			<div class="mobile-menu-icon"></div>
-			<div class="v_slider_clear"></div>
+		<h1 class="title">V SLIDER</h1>
+		<div class="v_slider_clear"></div>
 	</header>
-	<nav class="menu">
-		<div class="nav-item ni1"><a href="">home</a></div>
-		<div class="nav-item ni2"><a href="">bio</a></div>
-		<div class="nav-item ni3"><a href="">gallery</a></div>
-		<div class="nav-item ni4"><a href="">contact</a></div>
-		<div class="nav-item ni5"><a href="">extra</a></div>
-	</nav>
 
 	<div class="mainwrap">
-			<div class="v_slider boss">
-				<div class="v_slider_container">
-					<!--ADD CLASS TO EACH IMAGE WITHIN v_slider_container in the Plugin-->
-					<img src="v-images/city2.png">
-					<img src="v-images/fog.png">
-					<img src="v-images/overlook.png">
-					<img src="v-images/snowcovered.png">
-					<img src="v-images/sparkler.png">
-					<img src="v-images/waves.png">
-					<img src="v-images/bridge.png">
-					<img src="v-images/room.png">
-					<div class="v_slider_clear"></div>
-				</div>
-				<div class="v_slider_controls">
-					<!-- <div class="v_slider_back_button">back</div>
-					<div class="v_slider_next_button">next</div> -->
-					<div class="v_slider_back_button">
-						<img src="images/v-slider-left-arrow.png">
-					</div>
-					<div class="v_slider_next_button">
-						<img src="images/v-slider-right-arrow.png">
-					</div>
-				<div class="v_slider_clear"></div>
-				</div>
+		<div class="v_slider boss">
+			<img src="images/lake.jpg" alt="">
+			<img src="images/overlook.png">
+			<img src="images/snowcovered.png">
+			<img src="images/sparkler.png">
+			<img src="images/bridge.png">
+			<div class="v_slider_controls">
+				<a href="#" data-action="previous" class="v_slider_back_button">
+					<img src="v-slider-images/v-slider-left-arrow.png">
+				</a>
+				<a href="#" data-action="next" class="v_slider_next_button">
+					<img src="v-slider-images/v-slider-right-arrow.png">
+				</a>
 			</div>
+		</div>
 
-		<div class="module col-2 about">
+		<div class="module col-1">
 			<h2>About v slider</h2>
 			<hr />
-			<p>V SLIDER is a <span class="emphasize">smooth</span>, <span class="emphasize">sleek</span>, and <span class="emphasize">simple</span> slideshow plugin for jQuery built around ease-of-use. It supports a declarative initialization style that allows full customization without any scripting. Simply include the plugin, declare your markup, and V SLIDER does the rest.</p>
-			<p><span class="emphasize">crisp.</span> <span class="emphasize">clean.</span> <span class="emphasize">comfortable.</span></p>
-			<p class="emphasize">so why should you use v slider?</p>
-			<p>Because you're cool.<br>And V SLIDER is cool, so it only makes sense.</p>
+			<p>V SLIDER is a jQuery slideshow plugin.</p>
+			<p>Get it <span class="emphasize">free</span> on <a href="https://github.com/isaachvazquez/v-slider">github</a>.</p>
 		</div>
-		<div class="module col-2 features">
-			<h2>Features</h2>
-			<hr />
-			<ul>
-				<li class="feature" data-tooltip="Control slide duration, transition speed, size and more!">Customizable</li>
-				<li class="feature" data-tooltip="One size, fits all...(Screens that is)">Responsive</li>
-				<li class="feature" data-tooltip="You want links? You got em'!">Linkable. Either button or full-width links.</li>
-				<li class="feature" data-tooltip="Because your pictures deserve it.">Pretty.</li>
-				<li class="feature" data-tooltip="2 Legit 2 Quit.">Legit.</li>
-			</ul>
-			<div class="button"><a href="#">demo</a></div>
-		</div>
-		<div class="v_slider_clear"></div>
+		<div class="clear"></div>
 
-		<div class="module col-2 about">
+		<div class="module col-1 features">
 			<h2>How it works</h2>
 			<hr />
-			<p>Simply add the HTML to the page. Call the javascript below, and voala!</p>
+			<p>Follow these 3 steps</p>
+			<p>1.) Include the v_slider_styles.css file in the head of the document.</p>
 			<div class="code">
 				<code>
-					<pre>
-(function ($) {
-	<span class="emphasize">$('.v_slider').v_slider();</span>
-})(jQuery);
-					</pre>
+<pre>
+&lt;head&gt;
+ &lt;link rel="stylesheet" href="path/to/v_slider_styles.css"&gt;
+&lt;/head&gt;
+</pre>
 				</code>
 			</div>
-			<div class="button">demo</div>
-		</div>
-		<div class="module col-2 features v1">
-			<div class="v_slider v11">
-				<div class="v_slider_links">
-					<a href="http://www.google.com"></a>
-					<a href="http://www.clockwork.net"></a>
-					<a href="http://www.isaacv.net"></a>
-					<a href="http://www.jakeandersonphoto.com/blog"></a>
-					<a href="http://www.trinity-studios.com"></a>
-				</div>
-				<div class="v_slider_container">
-					<img src="images/lake2.png">
-					<img src="images/lake.png">
-					<img src="images/lake1.png">
-					<img src="images/lake3.png">
-					<img src="v-images/room.png">
-					<div class="v_slider_clear"></div>
-				</div>
-				<div class="v_slider_controls">
-					<div class="v_slider_back_button">
-						<img src="images/v-slider-left-arrow.png">
-					</div>
-					<div class="v_slider_next_button">
-						<img src="images/v-slider-right-arrow.png">
-					</div>
-				<div class="v_slider_clear"></div>
-				</div>
-			</div>
-		</div>
-		<div class="v_slider_clear"></div>
 
-		<div class="module col-2 features v2">
-			<div class="v_slider v22">
-				<div class="v_slider_links">
-					<a href="http://www.google.com">Read more...</a>
-					<a href="http://www.clockwork.net">Clockwork</a>
-					<a href="http://www.isaacv.net">Web Development</a>
-					<a href="http://www.jakeandersonphoto.com/blog">Photography</a>
-					<a href="http://www.trinity-studios.com">Trinity Studios</a>
-				</div>
-				<div class="v_slider_container">
-					<img src="images/lake2.png">
-					<img src="images/lake.png">
-					<img src="images/lake1.png">
-					<img src="images/lake3.png">
-					<img src="v-images/room.png">
-					<div class="v_slider_clear"></div>
-				</div>
-				<div class="v_slider_controls">
-					<div class="v_slider_back_button">
-						<img src="images/v-slider-left-arrow.png">
-					</div>
-					<div class="v_slider_next_button">
-						<img src="images/v-slider-right-arrow.png">
-					</div>
-				<div class="v_slider_clear"></div>
-				</div>
+			<p>2.) Simply add the HTML to the page.</p>
+			<div class="code">
+				<code>
+<pre>
+&lt;div class="v_slider my_slider"&gt;
+ &lt;img src="image.png"&gt;
+ &lt;img src="image.png"&gt;
+ &lt;img src="image.png"&gt;
+ &lt;img src="image.png"&gt;
+ &lt;div class="v_slider_controls"&gt;
+  &lt;a href="#" data-action="previous" class="v_slider_back_button"&gt;
+   &lt;img src="v-slider-images/v-slider-left-arrow.png"&gt;
+  &lt;/a&gt;
+  &lt;a href="#" data-action="next" class="v_slider_next_button"&gt;
+   &lt;img src="v-slider-images/v-slider-right-arrow.png"&gt;
+  &lt;/a&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+				</code>
 			</div>
-		</div>
 
-		<div class="module col-2 features v3">
-			<div class="v_slider v33">
-				<div class="v_slider_container">
-					<img src="bimages/vs1.png">
-					<img src="bimages/vs2.png">
-					<img src="bimages/vs3.png">
-					<img src="bimages/vs4.png">
-					<img src="bimages/vs5.png">
-					<img src="bimages/vs6.png">
-					<img src="bimages/vs7.png">
-					<div class="v_slider_clear"></div>
-				</div>
-				<div class="v_slider_controls">
-					<div class="v_slider_back_button">
-						<img src="images/v-slider-left-arrow.png">
-					</div>
-					<div class="v_slider_next_button">
-						<img src="images/v-slider-right-arrow.png">
-					</div>
-				<div class="v_slider_clear"></div>
-				</div>
+			<p>3.) Include the v_slider.js file before the closing &lt;/body&gt; tag.</p>
+			<div class="code">
+				<code>
+<pre>
+ &lt;script src="path/to/v_slider.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+</pre>
+				</code>
 			</div>
+
+			<p>4.) Call the javascript below, and voala!</p>
+			<div class="code">
+				<code>
+<pre>
+(function ($) {
+ <span class="emphasize">$('.my_slider').v_slider();</span>
+})(jQuery);
+</pre>
+				</code>
+			</div>
+
+			<!-- <h2>Demos</h2>
+			<a href="#">Demo 1</a>
+			<a href="#">Demo 2</a>
+			<a href="#">Demo 3</a>
+			<a href="#">Demo 4</a> -->
 		</div>
-		<div class="v_slider_clear"></div>
+		<div class="clear"></div>
 
 	</div>
 
-			<div class="v_slider loner">
-				<div class="v_slider_container">
-					<!--ADD CLASS TO EACH IMAGE WITHIN v_slider_container in the Plugin-->
-					<img src="v-images/frozen3.jpg" alt="">
-					<img src="v-images/frozenlake.jpg" alt="">
-					<img src="v-images/house.jpg" alt="">
-					<img src="v-images/hyder.jpg" alt="">
-					<img src="v-images/kateryan.jpg" alt="">
-					<img src="v-images/lake.jpg" alt="">
-					<img src="v-images/canoe.jpg" alt="">
-					<img src="v-images/dusting.jpg" alt="">
-					<img src="v-images/flyfishing.jpg" alt="">
-					<img src="v-images/flyfishing2.jpg" alt="">
-					<img src="v-images/flyfishing3.jpg" alt="">
-					<img src="v-images/river.jpg" alt="">
-					<img src="v-images/riverbed.jpg" alt="">
-					<img src="v-images/trees.jpg" alt="">
-					<img src="v-images/trout.jpg" alt="">
-					<img src="v-images/valley.jpg" alt="">
-					<img src="v-images/dock.jpg" alt="">
-					<img src="v-images/elk.jpg" alt="">
-					<img src="v-images/frozen.jpg" alt="">
-					<img src="v-images/frozen2.jpg" alt="">
-					<img src="v-images/road.jpg" alt="">
-					<img src="v-images/treefog.jpg" alt="">
-					<img src="v-images/trout2.jpg" alt="">
-					<img src="v-images/valley2.jpg" alt="">
-					<img src="v-images/valley3.jpg" alt="">
-
-					<div class="v_slider_clear"></div>
-				</div>
-				<div class="v_slider_controls">
-					<!-- <div class="v_slider_back_button">back</div>
-					<div class="v_slider_next_button">next</div> -->
-					<div class="v_slider_back_button">
-						<img src="images/v-slider-left-arrow.png">
-					</div>
-					<div class="v_slider_next_button">
-						<img src="images/v-slider-right-arrow.png">
-					</div>
-				<div class="v_slider_clear"></div>
-				</div>
-			</div>
-
 	<footer>
-		<p><span style="font-family: 'Arial Narrow', sans-serif; font-weight: normal;">&copy;</span> 2014 | Built by <a href="http://www.isaacv.net" target="_blank" class="isaac">Isaac Vazquez</a> | <a href="#">HGA</a></p>
+		<p>
+			<span style="font-family: 'Arial Narrow', sans-serif; font-weight: normal;">&copy;</span> 2014 | Built by <a href="http://www.isaacv.net" target="_blank" class="isaac">Isaac Vazquez</a> | <a href="#">HGA</a></p>
 	</footer>
 
 
 
 	<!--SCRIPTS & JQUERY-->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-	<!-- <script type="text/javascript" src="v_slider_include_console_log.js"></script> -->
-	<script defer type="text/javascript" src="v_slider.js"></script>
-	<script defer type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="js/v_slider.js"></script>
+	<script>
+		$('.boss').v_slider({
+			speed: 3000, // Slide duration (in milliseconds)
+			// max_slider_width: 600,
+			transition_speed: 1 // Transition Speed (in seconds)
+			// dev: true,
+			// paused: true
+		});
+
+		$('.v11').v_slider({
+			// speed: 1500, // Slide duration (in milliseconds)
+			// max_slider_width: 600,
+			transition_speed: 0.3, // Transition Speed (in seconds)
+			// dev: true,
+			paused: true
+		});
+
+		$('.loner').v_slider({
+			// speed: 1500, // Slide duration (in milliseconds)
+			// max_slider_width: 600,
+			transition_speed: 0.3, // Transition Speed (in seconds)
+			// dev: true,
+			paused: true
+		});
+	</script>
 
 </body>
-  
+
 </html>

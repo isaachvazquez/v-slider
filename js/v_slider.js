@@ -20,14 +20,10 @@ responsive for all image sizes and orientations.
 -----------------------------------------------------------------------------
 
 **Notes**
-
-Change all selectors to hav $el.find in front
-fix all options. variables
-
-
-var find_something = 'find';
-$el[find_something]('img');
-
+Any event handlers should follow the pattern:
+=> $el.on('eventName', 'selector', function(){});
+instead of,
+=> $(body).on('eventName', 'selector', function(){});
 
 ==========================================================================*/
 (function($) {
@@ -35,8 +31,8 @@ $el[find_something]('img');
 
   // These locally scoped variables help minification by aliasing strings
   var data_key = 'v_slider_options', // Namespace plugin data
-    event_suffix = '.v_slider_', // Namspace events
-    class_prefix = '.v_slider-', // Namspace events
+    event_suffix = '-v_slider', // Namspace events
+    class_prefix = '.v_slider-', // Namspace css classes
 
 
     // Custom events
@@ -53,35 +49,48 @@ $el[find_something]('img');
         // Options added here are defaults, if different values are passed when initiallized, these will be overridden
         options = $.extend({
           slide_selector: 'img',
-          speed: 5000, //Default slide duration
-          transition_speed: 1000, //Default transition speed
-          paused: false, //Auto Play on page load
-          fixed_container_height: null, //Change to specified px if you want a fixed height. Non responsive
-          slider_width_px: null, //Default null so slider defaults with 100% and fits it's containing element. Non responsive
-          slider_width_percent: 100, //Default Container Width
-          full_width_links: false,
-          max_slider_width: 1400,
+          speed: 5000, // Default slide duration
+          transition_speed: 0.5, // Default transition speed
+          paused: false, // Auto Play on page load
+          fixed_container_height: null, // Change to specified px if you want a fixed height. Non responsive
+          slider_width_px: null, // Default null so slider defaults with 100% and fits it's containing element. Non responsive
+          slider_width_percent: 100, // Default Container Width
+          full_width_links: false, // TODO: Not in use currently.
+          max_slider_width: 2400, // Sets a max-width on the slider (pixels only right now, add % later)
+          controls: true, // TODO: Eventually will allow overriding controls.
+          dev: false, // Tells the plugin to log dev information to the console or not.
+          logging: false // Tells the plugin to print the plugin options in use.
         }, settings);
 
-      //Plugin Variables
-      options.elements = '';
-      options.slider = $el;
+      if(options.logging){
+        console.log('[== Plugin Options ==]')
+        console.log('=> speed: ' + options.speed + 'ms');
+        console.log('=> transition_speed: ' + options.transition_speed + 's');
+        console.log('=> paused: ' + options.paused);
+        console.log('=> max_slider_width: ' + options.max_slider_width + 'px');
+        // console.log('=> : ' + options.);
+        console.log('==============================');
+      }
+
+      // Locally Scoped Variables. (Not accessible via instantiation)
       options.numberOfSlides = $el.children(options.slide_selector).length;
       options.currentSlide = 1;
-      options.linkContainer = $el.find('' + class_prefix + 'links');
-      options.numberOfLinks = $el.find('' + class_prefix + 'links').children('a').length; //Get the number of slides on the page.
+      // options.linkContainer = $el.find('' + class_prefix + 'links');
+      // options.numberOfLinks = $el.find('' + class_prefix + 'links').children('a').length; //Get the number of slides on the page.
 
-      console.log('Number of Slides: ', options.numberOfSlides);
-      console.log('Number of Links: ' + options.numberOfLinks);
+      if(options.dev){
+        // console.log('Number of Links: ' + options.numberOfLinks);
+      }
 
       // Store data on the element for use later
       $el.data(data_key, options);
 
       //Initialize and Create all the plugin elements
       //===============================================
-      console.log('==Initiallized==');
+      if(options.dev){
+        console.log('[== Initiallized ==]');
+      }
       methods._create_plugin_elements.apply(this);
-
 
       // Begin Timer
       //=============
@@ -96,14 +105,16 @@ $el[find_something]('img');
 
       // Click events
       //==============
-      $el.find('' + class_prefix + 'next_button').click(function() {
+      $el.on('click', '.v_slider_controls a', function(e) {
+        e.preventDefault();
+        var action = $(this).attr('data-action');
         window.clearInterval(v_slider_timer);
-        $el.v_slider('next_image');
-      });
-
-      $el.find('' + class_prefix + 'back_button').click(function() {
-        window.clearInterval(v_slider_timer);
-        $el.v_slider('previous_image');
+        if(action === 'next'){
+          $el.v_slider('next_image');
+        }else
+        if(action === 'previous'){
+          $el.v_slider('previous_image');
+        }
       });
 
       return $el;
@@ -115,19 +126,21 @@ $el[find_something]('img');
         // Retrieve data stored on element
         options = $el.data(data_key);
 
-      // ADD CLASS v_slider_image TO ALL IMAGES WITHIN v_slider_container
-      //==========================================================================
+
+      // Set the transition specified
+      //==============================
+      $el.children('img').css({
+        '-webkit-transition-duration': options.transition_speed + 's',
+        'transition-duration': options.transition_speed + 's'
+      });
+
 
       // Create CONTROLS
       //==================
-      // <div class="v_slider_controls">
-      //   <a href="#" data-action="back">
-  		// 	 <img src="images/v-slider-left-arrow.png">
-  		//   </a>
-  		//   <a href="#" data-action="next">
-  		// 		<img src="images/v-slider-right-arrow.png">
-  		// 	</a>
-  		// </div>
+
+      if(options.controls){
+        // add in the controls for each v_slider
+      }
 
 
       // SET LINK STYLES
@@ -145,15 +158,18 @@ $el[find_something]('img');
         tallestPortraitImageWidth = 0,
         tallestLandscapeImageHeight = 0,
         tallestLandscapeImageWidth = 0,
-        sliderHeight = null,
-        aspectRatio = null,
+        sliderHeight = 0,
+        aspectRatio = 0,
         hasPortraitImages = false, // boolean value
         hasLandscapeImages = false, // boolean value
         sliderWidth = $el.width(); // Needs to be slider width
 
-      console.log('Screen Width: ' + sliderWidth);
-      console.log('V Slider Width: ' + sliderWidth);
-
+      if(options.dev){
+        console.log('[== Printing Container Widths ==]');
+        console.log('Screen Width: ' + sliderWidth);
+        console.log('V Slider Width: ' + sliderWidth);
+        console.log('=============================');
+      }
       var imageIndex = 1;
       //Display first image in slider. (i.e. set opacity to 1)
       $el.children('img:nth-child(' + imageIndex + ')').addClass('v_active');
@@ -162,18 +178,22 @@ $el[find_something]('img');
       //=============================================================
       //=============================================================
       //=============================================================
+      if(options.dev){
+        console.log('[== Finding largest Image ==]');
+      }
+
       for (var i = 0; i < options.numberOfSlides; i++) {
-        $el.children('img:nth-child(' + imageIndex + ')').attr('data-order', imageIndex);
+        $el.children('img:nth-child(' + imageIndex + ')').attr('data-order', imageIndex).attr('id', 'v-' + imageIndex);
 
         //Check image size, and addClass('narrow')
         // Get on screen image
         //==========================================================================================
         var currentImage = $el.children('img:nth-child(' + imageIndex + ')');
+        var currentImageObject = document.getElementById('v-' + imageIndex);
 
         // Get accurate measurements from that.
-        var imageWidth = currentImage.width(),
-          imageHeight = currentImage.height();
-
+        var imageWidth = currentImageObject.width,
+          imageHeight = currentImageObject.height;
 
         // Portrait/Landscape Test
         //=========================
@@ -191,10 +211,11 @@ $el[find_something]('img');
           tallestLandscapeImageHeight = imageHeight;
           tallestLandscapeImageWidth = imageWidth;
 
-          // Prints tallest image file name
-          // console.log(currentImage.attr('src'));
-          // console.log('Tallest Landscape Image Dimensions: ' + tallestLandscapeImageHeight + ' x ' + tallestLandscapeImageWidth);
-
+          if(options.dev){
+            // Prints tallest image file name
+            console.log(currentImage.attr('src'));
+            console.log('Tallest Landscape Image Dimensions: ' + tallestLandscapeImageHeight + ' x ' + tallestLandscapeImageWidth);
+          }
           // Flag for later use
           hasLandscapeImages = true;
         }
@@ -205,9 +226,11 @@ $el[find_something]('img');
           tallestPortraitImageHeight = imageHeight;
           tallestPortraitImageWidth = imageWidth;
 
-          // Prints tallest image file name
-          // console.log(currentImage.attr('src'));
-          // console.log('Tallest Portrait Image Dimensions: ' + tallestPortraitImageHeight + ' x ' + tallestPortraitImageWidth);
+          if(options.dev){
+            // Prints tallest image file name
+            console.log(currentImage.attr('src'));
+            console.log('Tallest Portrait Image Dimensions: ' + tallestPortraitImageHeight + ' x ' + tallestPortraitImageWidth);
+          }
 
           // Flag for later use
           hasPortraitImages = true;
@@ -219,48 +242,50 @@ $el[find_something]('img');
           // This covers if there are only Portrait Oriented Images
           aspectRatio = tallestPortraitImageHeight / tallestPortraitImageWidth;
           sliderHeight = ((sliderWidth * aspectRatio) / 2);
-          // console.log('Slider Height: ' + sliderHeight + 'px');
         } else {
           // This covers all other combinations
           aspectRatio = tallestLandscapeImageHeight / tallestLandscapeImageWidth;
           sliderHeight = sliderWidth * aspectRatio;
-          // console.log('Slider Height: ' + sliderHeight + 'px');
         }
-        console.log('Aspect Ratio: ' + aspectRatio);
 
-        // TODO
-
-        console.log('i: ' + i + ', imageIndex: ' + imageIndex);
         imageIndex++;
       } // End For Loop (Looping through images to get heights)
 
-
-      //=============================================================
-      //=============================================================
-      //=============================================================
-      // Check options.max_slider_width
-      if (options.max_slider_width != null) {
-        if (sliderWidth < options.max_slider_width) {
-          //use parent width
-          sliderWidth = $el.width();
-        } else {
-          sliderWidth = options.max_slider_width;
-        }
-        $el.css({ 'max-width': sliderWidth + 'px'});
-      }else{
-        // Default max-width for the image slider to the screen width
-        sliderWidth = screen.width;
-        $el.css({ 'max-width': sliderWidth + 'px'});
+      // Print results from largest image test
+      if(options.dev){
+        console.log('[== Printing Largest Image Aspect Ration & Height ==]');
+        console.log('Aspect Ratio: ' + aspectRatio);
+        console.log('----------------------------');
       }
 
-      // Set Slider Width
-      //==================
-      // $el.css({ 'max-width': sliderWidth + 'px'});
+      //=============================================================
+      //=============================================================
+      //=============================================================
+      // Set Slider width
+      if (options.max_slider_width != null) {
+        if (sliderWidth < options.max_slider_width) {
+          $el.css({ 'max-width': options.max_slider_width + 'px'});
+        } else {
+          sliderWidth = options.max_slider_width;
+          $el.css({ 'max-width': sliderWidth + 'px'});
+        }
+      }else{
+        // Default max-width for the image slider to the screen width
+        $el.css({ 'max-width': '100%'});
+      }
+
+      if(options.dev){
+        console.log('[== Setting Slider Width ==]');
+        console.log('Slider Width: ' + sliderWidth);
+      }
 
       // Set Slider height
       //===================
       var sliderHeight = sliderWidth * aspectRatio;
-      console.log(sliderHeight);
+      if(options.dev){
+        console.log('[== Setting Slider Height ==]');
+        console.log('Slider Height: ' + sliderHeight);
+      }
       $el.css({'height': sliderHeight + 'px'});
 
 
@@ -273,23 +298,34 @@ $el[find_something]('img');
       var currentSliderHeight = null;
       $(window).resize(function() {
         // ========================================
-        if ($(document).width() <= options.max_slider_width) {
+        var breakpointTest = $(document).width() <= options.max_slider_width;
+        if(options.dev){
+          console.log(breakpointTest);
+        }
+        if (breakpointTest) {
           if (aspectRatio > 1) {
             currentSliderHeight = (($el.width() * aspectRatio) / 2);
-            console.log('Slider Height: ' + currentSliderHeight + 'px');
+            if(options.dev){
+              console.log('Slider Height: ' + currentSliderHeight + 'px');
+            }
           } else {
             currentSliderHeight = $el.width() * aspectRatio;
-            console.log('Slider Height: ' + currentSliderHeight + 'px');
+            if(options.dev){
+              console.log('Slider Height: ' + currentSliderHeight + 'px');
+            }
           }
-         $el.css({'height': sliderHeight + 'px'});
-          console.log('==============================');
+         $el.css({'height': currentSliderHeight + 'px'});
+         if(options.dev){
+           console.log('==============================');
+         }
         }
-        // ========================================
-        // if (options.max_slider_width === null) {
-        //   console.log('max_slider_width not set');
-        //
-        // }
       });
+
+      if(options.dev){
+        console.log('=============================================================');
+        console.log('END OF SLIDER INIT');
+        console.log('=============================================================');
+      }
 
       return $el;
     }, // END METHOD _create_plugin_elements
@@ -314,20 +350,23 @@ $el[find_something]('img');
 
       $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
 
-      // console.log('options.currentSlide: ' + options.currentSlide);
+      if(options.dev){
+        console.log('options.currentSlide: ' + options.currentSlide);
+      }
 
       return $el;
     }, //END METHOD next_image
 
-    // ====================
+    // ========================
     // PREVIOUS IMAGE FUNCTION
-    // ====================
+    // ========================
     previous_image: function() {
 
       var $el = $(this),
         // Retrieve data stored on element
         options = $el.data(data_key);
-      // console.log('Previous Image function FIRED!!');
+
+      $el.children('[data-order="' + options.currentSlide + '"]').removeClass('v_active');
 
       // Decrement options.currentSlide
       if (options.currentSlide > 1 && options.currentSlide <= options.numberOfSlides) {
@@ -336,7 +375,11 @@ $el[find_something]('img');
         options.currentSlide = options.numberOfSlides;
       }
 
-        // console.log('options.currentSlide: ' + options.currentSlide);
+      $el.children('[data-order="' + options.currentSlide + '"]').addClass('v_active');
+
+      if(options.dev){
+        console.log('options.currentSlide: ' + options.currentSlide);
+      }
 
       return $el;
     }
