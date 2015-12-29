@@ -1,6 +1,11 @@
 # v-slider
 Unfinished.
 
+## TODO:
+* Ability for linkable slides (Full width & buttons).
+* Ability to add custom control arrows.
+* ...
+
 
 ### Requirements
 * jQuery
