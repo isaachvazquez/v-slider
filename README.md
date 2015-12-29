@@ -1,8 +1,8 @@
 # v-slider
-Unfinished.
+Work in progress.
 
 ### Requirements
-* jQuery
+* jQuery 1.10.2
 
 ### Usage
 
