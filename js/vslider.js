@@ -540,32 +540,26 @@ Chrome, ...
         // Ready to begin Timer
         v_slider.timer_active = !options.paused;
 
-        console.log("Timer Active after Setup: ", v_slider.timer_active);
         setTimeout(function() { // 0.5s delay to avoid flash images
           v_slider_item_container.classList.add('ready');
           if(v_slider.timer_active) { methods.beginTimer(); }
-          console.log("Timer Active after Begin Timer: ", v_slider.timer_active);
         }, 500);
-
-        console.log(v_slider.timer);
       },
       pauseTimer: function() {
-        console.log('Pause Timer');
-        console.log(v_slider.timer);
-        window.clearInterval(v_slider.timer);
-        v_slider.timer_active = false;
+        // console.log('Pause Timer');
+        // console.log(v_slider.timer);
+        // window.clearInterval(v_slider.timer);
+        // v_slider.timer_active = false;
       },
       beginTimer: function() {
-        console.log('Begin Timer');
-        v_slider.timer = setInterval(function() { methods.nextItem(); }, options.speed);
-        v_slider.timer_active = true;
+        // console.log('Begin Timer');
+        // v_slider.timer = setInterval(function() { methods.nextItem(); }, options.speed);
+        // v_slider.timer_active = true;
       },
       nextItem: function(e) {
-        if(e && e.type === 'click') {
-          console.log("Timer Active(next item): ", v_slider.timer_active);
-          if(v_slider.timer_active) { methods.pauseTimer(); }
-        }
-        console.log("Timer Active(next item errtime): ", v_slider.timer_active);
+        // if(e && e.type === 'click') {
+        //   if(v_slider.timer_active) { methods.pauseTimer(); }
+        // }
         console.log('Next Item');
         // Get current active item
         // var activeItem = v_slider.getElementsByClassName('[data-v="' + v_slider_activeItemIndex + '"')[0];
@@ -576,10 +570,9 @@ Chrome, ...
         // v_slider_activeItemIndex++;
       },
       previousItem: function(e) {
-        if(e && e.type === 'click') {
-          console.log("Timer Active(previous item): ", v_slider.timer_active);
-          if(v_slider.timer_active) { methods.pauseTimer(); }
-        }
+        // if(e && e.type === 'click') {
+        //   if(v_slider.timer_active) { methods.pauseTimer(); }
+        // }
         console.log('Previous Item');
         // Get current active item
         // remove class '.active' from current active item
