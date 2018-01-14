@@ -434,31 +434,27 @@ Chrome, ...
 (function() {
   "use strict";
 
+  var clickListenerAdded = false,
+      body = document.querySelector('body');
+
   Object.prototype.vslider = function() {
-    var v_slider = this, // 'this' is the element which invoked the Object.prototype.plugin function. (ex: element.plugin();)
-        v_slider_timer = null,
-        body = document.querySelector('body');
+    var v_slider = this,
+        v_slider_activeItemIndex = 0;
 
     v_slider.options = arguments[0];
 
     // Default options
     var defaultOptions = {
-      slide_selector: 'img',
       speed: 5000, // Default slide duration
       transition_speed: 0.5, // Default transition speed
       paused: false, // Auto Play on page load
-      fixed_container_height: null, // Change to specified px if you want a fixed height. Non responsive
       slider_width_px: null, // Default null so slider defaults with 100% and fits it's containing element. Non responsive
-      slider_width_percent: 100, // Default Container Width
-      full_width_links: false, // TODO: Not in use currently.
       max_slider_width: 2400, // Sets a max-width on the slider (pixels only right now, add % later)
-      controls: true, // TODO: Eventually will allow overriding controls.
       dev: false, // Tells the plugin to log dev information to the console or not.
-      logging: false // Tells the plugin to print the plugin options in use.
+      logging: false, // Tells the plugin to print the plugin options in use.
     }
 
     var options = Object.assign({}, defaultOptions, v_slider.options);
-
 
 
     if(options.logging) {
@@ -467,82 +463,129 @@ Chrome, ...
       console.log('=> transition_speed: ' + options.transition_speed + 's');
       console.log('=> paused: ' + options.paused);
       console.log('=> max_slider_width: ' + options.max_slider_width + 'px');
-      // console.log('=> : ' + options.);
       console.log('==============================');
     }
 
     var methods = {
       init: function() {
         v_slider.initialized = true;
+        v_slider.timer = null;
+        v_slider.timer_active = true;
 
-        methods._setupPluginElements(methods.beginTimer);
+        methods._setupPluginElements();
 
         // Click events
         //==============
-        body.addEventListener('click', function(e) {
-          e.preventDefault();
+        if(!clickListenerAdded) {
+          body.addEventListener('click', function(e) {
+            var target = e.target.className,
+                jsSliderNext = "js-vslider-next",
+                jsSliderPrevious = "js-vslider-previous";
 
-          var target = e.target.className,
-              jsSliderNext = "js-vslider-next",
-              jsSliderPrevious = "js-vslider-previous";
+            if(target.indexOf(jsSliderNext) != -1) {
+              methods.nextItem(e);
+            }
 
-          if(target.indexOf(jsSliderNext) != -1) {
-            // if(sliderActive) { methods.pauseTimer(); }
-            methods.nextItem();
-          }
+            if(target.indexOf(jsSliderPrevious) != -1) {
+              methods.previousItem(e);
+            }
 
-          if(target.indexOf(jsSliderPrevious) != -1) {
-            // if(sliderActive) { methods.pauseTimer(); }
-            methods.previousItem();
-          }
+          });
 
-        });
+          clickListenerAdded = true;
+        }
+
+
+        // setTimeout(function() {
+        //   console.log('INTERVAL CLEARED...supposedly.');
+        //   // window.clearInterval(v_slider.timer);
+        //   methods.pauseTimer();
+        // }, 5000);
       },
-      _setupPluginElements: function(callback) {
-        var v_slider_items = v_slider.getElementsByClassName('vslider-items')[0];
+      _setupPluginElements: function() {
+        var v_slider_item_container = v_slider.getElementsByClassName('vslider-items')[0],
+            v_slider_items = v_slider_item_container.children,
+            tallestLandscapeItemHeight = 0,
+            tallestItemAspectRatio = 1;
 
-        // // Add vslider classes
-        Object.keys(v_slider_items.children).forEach(function(index) {
-          var item = v_slider_items.children[index],
+        v_slider.style.maxWidth = options.max_slider_width + 'px';
+
+        // Add vslider classes
+        Object.keys(v_slider_items).forEach(function(index) {
+          var item = v_slider_items[index],
               itemWidth = item.clientWidth,
               itemHeight = item.clientHeight,
               itemAspectRatio = itemHeight / itemWidth;
 
+          if(itemAspectRatio < 1) {
+            if(itemHeight > tallestLandscapeItemHeight) {
+              tallestLandscapeItemHeight = itemHeight;
+              tallestItemAspectRatio = itemAspectRatio;
+            }
+          }
+
           itemAspectRatio > 1 ? item.classList.add('portrait') : item.classList.add('landscape');
+
           item.classList.add('vslider-item');
           item.dataset.v = index;
         });
 
-        v_slider.style.height = "777px";
+        // Set the slider height
+        var sliderHeight = 100 * tallestItemAspectRatio;
+        v_slider_item_container.style.paddingTop = sliderHeight + '%';
 
         // Set first slider item to active
+        v_slider_items[0].classList.add('active');
 
+        // Ready to begin Timer
+        v_slider.timer_active = !options.paused;
 
-        callback();
-      },
-      _privateMethod: function() {
-        console.log('Private Method');
+        console.log("Timer Active after Setup: ", v_slider.timer_active);
+        setTimeout(function() { // 0.5s delay to avoid flash images
+          v_slider_item_container.classList.add('ready');
+          if(v_slider.timer_active) { methods.beginTimer(); }
+          console.log("Timer Active after Begin Timer: ", v_slider.timer_active);
+        }, 500);
+
+        console.log(v_slider.timer);
       },
       pauseTimer: function() {
         console.log('Pause Timer');
-        window.clearInterval(v_slider_timer);
+        console.log(v_slider.timer);
+        window.clearInterval(v_slider.timer);
+        v_slider.timer_active = false;
       },
       beginTimer: function() {
         console.log('Begin Timer');
-        if (options.paused) {
-          //do not start v_slider_timer
-        } else {
-          //start v_slider_timer
-          v_slider_timer = setInterval(function() {
-            v_slider.vslider('nextItem');
-          }, options.speed);
+        v_slider.timer = setInterval(function() { methods.nextItem(); }, options.speed);
+        v_slider.timer_active = true;
+      },
+      nextItem: function(e) {
+        if(e && e.type === 'click') {
+          console.log("Timer Active(next item): ", v_slider.timer_active);
+          if(v_slider.timer_active) { methods.pauseTimer(); }
         }
-      },
-      nextItem: function() {
+        console.log("Timer Active(next item errtime): ", v_slider.timer_active);
         console.log('Next Item');
+        // Get current active item
+        // var activeItem = v_slider.getElementsByClassName('[data-v="' + v_slider_activeItemIndex + '"')[0];
+        // remove class '.active' from current active item
+        // activeItem.
+        // increment by 1 unless last item then go back to 0
+        // set class '.active' to new current active item
+        // v_slider_activeItemIndex++;
       },
-      previousItem: function() {
+      previousItem: function(e) {
+        if(e && e.type === 'click') {
+          console.log("Timer Active(previous item): ", v_slider.timer_active);
+          if(v_slider.timer_active) { methods.pauseTimer(); }
+        }
         console.log('Previous Item');
+        // Get current active item
+        // remove class '.active' from current active item
+        // decrement by 1 unless first item then go to last item (n)
+        // set class '.active' to new current active item
+        // v_slider_activeItemIndex--;
       }
     }
 

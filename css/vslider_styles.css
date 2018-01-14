@@ -141,25 +141,24 @@
 /* V SLIDER (MAIN CONTAINER)
 ============================= */
 .vslider {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
 	position: relative;
 	margin: 0 auto;
 	min-height: 100px;
 	width: 100%;
 	max-width: 100%;
 	overflow: hidden;
+
+
+	margin-bottom: 20px;
 }
 
 .vslider-items {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+	position: relative;
+	opacity: 0;
+	transition: opacity 0.5s;
 }
+
+.vslider-items.ready { opacity: 1; }
 
 .vslider-item {
 	position: absolute;
@@ -173,32 +172,36 @@
 }
 
 .vslider-item.active { opacity: 1; }
-.vslider-item.portrait { width: 50%; }
+.vslider-item.portrait { height: 100%; width: auto; }
 .vslider-item.landscape { width: 100%; }
 
 
 /* V SLIDER CONTROLS
 ============================= */
+
+.vslider:hover .vslider-button { opacity: 1; }
+
 .vslider-button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+
 	padding: 15px;
 	height: 50px;
-	opacity: 0.5;
+	opacity: 0;
 	border: 1px solid #000000;
 	cursor: pointer;
 
 	transition: all 0.5s;
 }
 
-.vslider-button:last-child { color: purple; justify-self: flex-end; }
+.vslider-button:last-child { right: 0; left: auto; }
 
 .vslider-button:hover {
-	opacity: 0.9;
+	background-color: #efe;
 }
-
-/*===========================================
-		END vslider PLUGIN STYLES
-===========================================*/

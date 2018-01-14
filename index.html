@@ -14,7 +14,6 @@
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="css/vslider_styles.css">
 	<title>vslider jQuery Plugin</title>
-	<link href='http://fonts.googleapis.com/css?family=Rajdhani:300,600' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
         <script src="html5shiv.js"></script>
     <![endif]-->
@@ -36,7 +35,7 @@
 		body {
 			margin: 0;
 			padding: 0;
-			font-family: 'Rajdhani', sans-serif;
+			font-family: Avenir, sans-serif;
 			background: #f5f5f5;
 			font-weight: bold;
 		}
@@ -242,6 +241,13 @@
 			/*text-shadow: 0 0px 3px #ffffff;*/
 		}
 
+		.card {
+			padding: 20px;
+			width: 100%;
+			min-height: 200px;
+			background-color: #efe;
+		}
+
 		.isaac {
 			text-transform: uppercase;
 			font-size: 12px;
@@ -292,36 +298,53 @@
 	<div class="mainwrap">
 		<div class="vslider slider1">
 			<div class="vslider-items">
+				<img src="images/house.jpg" data-link="http://isaacv.net?t=house">
 				<img src="images/lake.jpg" data-link="http://isaacv.net?t=lake">
 				<img src="images/elk.jpg" data-link="http://isaacv.net?t=elk">
 				<img src="images/trees.jpg" data-link="http://isaacv.net?t=trees">
 				<img src="images/trout.jpg" data-link="http://isaacv.net?t=trout">
 				<img src="images/trout2.jpg" data-link="http://isaacv.net?t=trout2">
 				<img src="images/kateryan.jpg" data-link="http://isaacv.net?t=river">
-				<img src="images/house.jpg" data-link="http://isaacv.net?t=house">
 				<img src="images/hyder.jpg" data-link="http://isaacv.net?t=hyder">
 				<img src="images/snow-forest.jpeg" data-link="http://isaacv.net?t=snow-forest">
 				<img src="images/snowcovered.png" data-link="http://isaacv.net?t=snow-covered">
 			</div>
-			<button class="vslider-button js-vslider-previous">Previous</button>
-			<button class="vslider-button js-vslider-next">Next</button>
+			<button class="v1 vslider-button js-vslider-previous">Previous</button>
+			<button class="v1 vslider-button js-vslider-next">Next</button>
 		</div>
 
-		<!-- <div class="vslider slider2">
-			<div class="vslider_items">
-				<img src="images/lake.jpg" data-link="http://isaacv.net?t=lake">
-				<img src="images/elk.jpg" data-link="http://isaacv.net?t=elk">
-				<img src="images/trees.jpg" data-link="http://isaacv.net?t=trees">
+
+		<div class="vslider slider2">
+			<div class="vslider-items">
+				<img src="images/hyder.jpg" data-link="http://isaacv.net?t=hyder">
+				<img src="images/snow-forest.jpeg" data-link="http://isaacv.net?t=snow-forest">
+				<img src="images/snowcovered.png" data-link="http://isaacv.net?t=snow-covered">
 			</div>
-			<div class="vslider_controls">
-				<a href="#" data-action="previous" class="vslider_back_button">
-					<img src="v-slider-images/v-slider-left-arrow.png">
-				</a>
-				<a href="#" data-action="next" class="vslider_next_button">
-					<img src="v-slider-images/v-slider-right-arrow.png">
-				</a>
+			<button class="v2 vslider-button js-vslider-previous">Previous</button>
+			<button class="v2 vslider-button js-vslider-next">Next</button>
+		</div>
+
+
+		<div class="vslider slider3">
+			<div class="vslider-items">
+				<div class="card">
+					<h3>Card Title</h3>
+					<p>Here is some text for the card.</p>
+				</div>
+				<div class="card">
+					<h3>Card Title</h3>
+					<p>Here is some text for the card.</p>
+				</div>
+				<div class="card">
+					<h3>Card Title</h3>
+					<p>Here is some text for the card.</p>
+				</div>
 			</div>
-		</div> -->
+			<button class="v3 vslider-button js-vslider-previous">Previous</button>
+			<button class="v3 vslider-button js-vslider-next">Next</button>
+		</div>
+
+		
 
 		<div class="module col-1">
 			<h2>About v slider</h2>
@@ -401,7 +424,7 @@
 
 	<footer>
 		<p>
-			<span style="font-family: 'Arial Narrow', sans-serif; font-weight: normal;">&copy;</span> 2014 | Built by <a href="http://www.isaacv.net" target="_blank" class="isaac">Isaac Vazquez</a> | <a href="#">HGA</a></p>
+			<span>&copy;</span> 2014 | Built by <a href="http://www.isaacv.net" target="_blank" class="isaac">Isaac Vazquez</a> | <a href="#">HGA</a></p>
 	</footer>
 
 
@@ -412,39 +435,33 @@
 	<script>
 
 		var slideshow1 = document.querySelector('.slider1'),
-				slideshow2 = document.querySelector('.slider2');
+				slideshow2 = document.querySelector('.slider2'),
+				slideshow3 = document.querySelector('.slider3');
 
 		slideshow1.vslider({
 			speed: 4000,
-			// max_slider_width: 600,
-			// transition_speed: 1 // Transition Speed (in seconds)
+			max_slider_width: 650,
+			transition_speed: 1, // Transition Speed (in seconds)
 			dev: true,
-			// paused: true
+			paused: true,
 			logging: true
 		});
 
-		// slideshow2.vslider({
-		// 	speed: 4000,
-		// 	// max_slider_width: 600,
-		// 	// transition_speed: 1 // Transition Speed (in seconds)
-		// 	dev: true,
-		// 	// paused: true
-		// 	logging: true
-		// });
+		slideshow2.vslider({
+			speed: 2000,
+			max_slider_width: 250,
+			dev: true,
+			// paused: true,
+			logging: true
+		});
 
-		// From Jakeandersonphoto.com
-		// speed                   : 4000, //Speed of slides (4000 = 4s)
-  	// transition_speed        : 1000, //Speed of transition between slides
-  	// max_slider_width        : 650, //
+		slideshow3.vslider({
+			speed: 2000,
+			dev: true,
+			paused: true,
+			logging: true
+		});
 
-
-		// $('.boss').vslider({
-		// 	speed: 3000, // Slide duration (in milliseconds)
-		// 	// max_slider_width: 600,
-		// 	transition_speed: 1 // Transition Speed (in seconds)
-		// 	// dev: true,
-		// 	// paused: true
-		// });
 	</script>
 
 </body>
