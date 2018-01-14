@@ -12,8 +12,8 @@
 	<meta name="viewport" content="initial-scale=1">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="css/v_slider_styles.css">
-	<title>v_slider jQuery Plugin</title>
+	<link rel="stylesheet" type="text/css" href="css/vslider_styles.css">
+	<title>vslider jQuery Plugin</title>
 	<link href='http://fonts.googleapis.com/css?family=Rajdhani:300,600' rel='stylesheet' type='text/css'>
 	<!--[if lt IE 9]>
         <script src="html5shiv.js"></script>
@@ -67,13 +67,13 @@
 		a:hover {
 			color: #498DA9;
 		}
-		/*overriding v_slider_styles.css*/
+		/*overriding vslider_styles.css*/
 
-		.v_slider_links a {
+		.vslider_links a {
 			color: #8D9EA5;
 		}
 
-		.v_slider_links a:hover {
+		.vslider_links a:hover {
 			color: #498DA9;
 		}
 
@@ -286,30 +286,42 @@
 
 	<header>
 		<h1 class="title">V SLIDER</h1>
-		<div class="v_slider_clear"></div>
+		<div class="vslider_clear"></div>
 	</header>
 
 	<div class="mainwrap">
-		<div class="v_slider boss">
-			<img src="images/lake.jpg" data-link="http://isaacv.net?t=lake">
-			<img src="images/elk.jpg" data-link="http://isaacv.net?t=elk">
-			<img src="images/trees.jpg" data-link="http://isaacv.net?t=trees">
-			<img src="images/trout.jpg" data-link="http://isaacv.net?t=trout">
-			<img src="images/trout2.jpg" data-link="http://isaacv.net?t=trout2">
-			<img src="images/kateryan.jpg" data-link="http://isaacv.net?t=river">
-			<img src="images/house.jpg" data-link="http://isaacv.net?t=house">
-			<img src="images/hyder.jpg" data-link="http://isaacv.net?t=hyder">
-			<img src="images/snow-forest.jpeg" data-link="http://isaacv.net?t=snow-forest">
-			<img src="images/snowcovered.png" data-link="http://isaacv.net?t=snow-covered">
-			<div class="v_slider_controls">
-				<a href="#" data-action="previous" class="v_slider_back_button">
+		<div class="vslider slider1">
+			<div class="vslider-items">
+				<img src="images/lake.jpg" data-link="http://isaacv.net?t=lake">
+				<img src="images/elk.jpg" data-link="http://isaacv.net?t=elk">
+				<img src="images/trees.jpg" data-link="http://isaacv.net?t=trees">
+				<img src="images/trout.jpg" data-link="http://isaacv.net?t=trout">
+				<img src="images/trout2.jpg" data-link="http://isaacv.net?t=trout2">
+				<img src="images/kateryan.jpg" data-link="http://isaacv.net?t=river">
+				<img src="images/house.jpg" data-link="http://isaacv.net?t=house">
+				<img src="images/hyder.jpg" data-link="http://isaacv.net?t=hyder">
+				<img src="images/snow-forest.jpeg" data-link="http://isaacv.net?t=snow-forest">
+				<img src="images/snowcovered.png" data-link="http://isaacv.net?t=snow-covered">
+			</div>
+			<button class="vslider-button js-vslider-previous">Previous</button>
+			<button class="vslider-button js-vslider-next">Next</button>
+		</div>
+
+		<!-- <div class="vslider slider2">
+			<div class="vslider_items">
+				<img src="images/lake.jpg" data-link="http://isaacv.net?t=lake">
+				<img src="images/elk.jpg" data-link="http://isaacv.net?t=elk">
+				<img src="images/trees.jpg" data-link="http://isaacv.net?t=trees">
+			</div>
+			<div class="vslider_controls">
+				<a href="#" data-action="previous" class="vslider_back_button">
 					<img src="v-slider-images/v-slider-left-arrow.png">
 				</a>
-				<a href="#" data-action="next" class="v_slider_next_button">
+				<a href="#" data-action="next" class="vslider_next_button">
 					<img src="v-slider-images/v-slider-right-arrow.png">
 				</a>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="module col-1">
 			<h2>About v slider</h2>
@@ -323,12 +335,12 @@
 			<h2>How it works</h2>
 			<hr />
 			<p>Follow these 3 steps</p>
-			<p>1.) Include the v_slider_styles.css file in the head of the document.</p>
+			<p>1.) Include the vslider_styles.css file in the head of the document.</p>
 			<div class="code">
 				<code>
 <pre>
 &lt;head&gt;
- &lt;link rel="stylesheet" href="path/to/v_slider_styles.css"&gt;
+ &lt;link rel="stylesheet" href="path/to/vslider_styles.css"&gt;
 &lt;/head&gt;
 </pre>
 				</code>
@@ -338,16 +350,16 @@
 			<div class="code">
 				<code>
 <pre>
-&lt;div class="v_slider my_slider"&gt;
+&lt;div class="vslider my_slider"&gt;
  &lt;img src="image.png"&gt;
  &lt;img src="image.png"&gt;
  &lt;img src="image.png"&gt;
  &lt;img src="image.png"&gt;
- &lt;div class="v_slider_controls"&gt;
-  &lt;a href="#" data-action="previous" class="v_slider_back_button"&gt;
+ &lt;div class="vslider_controls"&gt;
+  &lt;a href="#" data-action="previous" class="vslider_back_button"&gt;
    &lt;img src="v-slider-images/v-slider-left-arrow.png"&gt;
   &lt;/a&gt;
-  &lt;a href="#" data-action="next" class="v_slider_next_button"&gt;
+  &lt;a href="#" data-action="next" class="vslider_next_button"&gt;
    &lt;img src="v-slider-images/v-slider-right-arrow.png"&gt;
   &lt;/a&gt;
  &lt;/div&gt;
@@ -356,11 +368,11 @@
 				</code>
 			</div>
 
-			<p>3.) Include the v_slider.js file before the closing &lt;/body&gt; tag.</p>
+			<p>3.) Include the vslider.js file before the closing &lt;/body&gt; tag.</p>
 			<div class="code">
 				<code>
 <pre>
- &lt;script src="path/to/v_slider.js"&gt;&lt;/script&gt;
+ &lt;script src="path/to/vslider.js"&gt;&lt;/script&gt;
 &lt;/body&gt;
 </pre>
 				</code>
@@ -371,7 +383,7 @@
 				<code>
 <pre>
 (function ($) {
- <span class="emphasize">$('.my_slider').v_slider();</span>
+ <span class="emphasize">$('.my_slider').vslider();</span>
 })(jQuery);
 </pre>
 				</code>
@@ -395,32 +407,44 @@
 
 
 	<!--SCRIPTS & JQUERY-->
-	<script type="text/javascript" src="js/libs/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="js/v_slider.js"></script>
+	<!-- <script type="text/javascript" src="js/libs/jquery-1.10.2.js"></script> -->
+	<script type="text/javascript" src="js/vslider.js"></script>
 	<script>
-		$('.boss').v_slider({
-			speed: 3000, // Slide duration (in milliseconds)
+
+		var slideshow1 = document.querySelector('.slider1'),
+				slideshow2 = document.querySelector('.slider2');
+
+		slideshow1.vslider({
+			speed: 4000,
 			// max_slider_width: 600,
-			transition_speed: 1 // Transition Speed (in seconds)
-			// dev: true,
+			// transition_speed: 1 // Transition Speed (in seconds)
+			dev: true,
 			// paused: true
+			logging: true
 		});
 
-		$('.v11').v_slider({
-			// speed: 1500, // Slide duration (in milliseconds)
-			// max_slider_width: 600,
-			transition_speed: 0.3, // Transition Speed (in seconds)
-			// dev: true,
-			paused: true
-		});
+		// slideshow2.vslider({
+		// 	speed: 4000,
+		// 	// max_slider_width: 600,
+		// 	// transition_speed: 1 // Transition Speed (in seconds)
+		// 	dev: true,
+		// 	// paused: true
+		// 	logging: true
+		// });
 
-		$('.loner').v_slider({
-			// speed: 1500, // Slide duration (in milliseconds)
-			// max_slider_width: 600,
-			transition_speed: 0.3, // Transition Speed (in seconds)
-			// dev: true,
-			paused: true
-		});
+		// From Jakeandersonphoto.com
+		// speed                   : 4000, //Speed of slides (4000 = 4s)
+  	// transition_speed        : 1000, //Speed of transition between slides
+  	// max_slider_width        : 650, //
+
+
+		// $('.boss').vslider({
+		// 	speed: 3000, // Slide duration (in milliseconds)
+		// 	// max_slider_width: 600,
+		// 	transition_speed: 1 // Transition Speed (in seconds)
+		// 	// dev: true,
+		// 	// paused: true
+		// });
 	</script>
 
 </body>
