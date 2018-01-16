@@ -10,15 +10,15 @@ Work in progress.
 
 Add the below HTML to any container you wish to add the vslider to
 
- <div class="vslider slider2">
-  <div class="vslider-items">
-    <img src="image.jpg">
-    <img src="image.jpg">
-    <img src="image.jpg">
-  </div>
-  <button class="vslider-button js-vslider-previous">Previous</button>
-  <button class="vslider-button js-vslider-next">Next</button>
- </div>
+	 <div class="vslider slider2">
+	  <div class="vslider-items">
+	    <img src="image.jpg">
+	    <img src="image.jpg">
+	    <img src="image.jpg">
+	  </div>
+	  <button class="vslider-button js-vslider-previous">Previous</button>
+	  <button class="vslider-button js-vslider-next">Next</button>
+	 </div>
 
 
 #### CSS
@@ -34,19 +34,19 @@ Add the vslider stylesheet to the head section of your html file above your cust
 Add the vslider js file to your html just above the closing body tag
 and above your main javascript file.
 
- <script src="path/to/vslider.js"></script>
- <script>
- // Most basic usage
- var el = vs_getAll('.slider1').vs_first();
- var vs1 = new VSlider(el, {});
+	 <script src="path/to/vslider.js"></script>
+	 <script>
+	 // Most basic usage
+	 var el = vs_getAll('.slider1').vs_first();
+	 var vs1 = new VSlider(el, {});
 
- // Using plugin options
- var el = vs_getAll('.slider1').vs_first();
- var vs1 = new VSlider(el, {
-  option1: value,
-  option2: value
- });
- </script>
+	 // Using plugin options
+	 var el = vs_getAll('.slider1').vs_first();
+	 var vs1 = new VSlider(el, {
+	  option1: value,
+	  option2: value
+	 });
+	 </script>
 
 
 ## TODO:
