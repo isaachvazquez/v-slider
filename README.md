@@ -1,58 +1,52 @@
-# v-slider
+# vslider
 
 Work in progress.
 
 ### Requirements
-* jQuery 1.10.2
 
 ### Usage
 
 #### HTML
 
-Add the below HTML to any container you wish to add the v_slider to
+Add the below HTML to any container you wish to add the vslider to
 
-	<div class="v_slider">
-	  <img src="..path/to/image.jpg">
-	  ...
-	  ...
-	  ...
-	  <img src="..path/to/image.jpg">
-	  <div class="v_slider_controls">
-			<a href="#" data-action="previous" class="v_slider_back_button">
-			 <img src="images/v-slider-left-arrow.png">
-		  </a>
-		  <a href="#" data-action="next" class="v_slider_next_button">
-				<img src="images/v-slider-right-arrow.png">
-	 		</a>
-		</div>
-	</div>
+ <div class="vslider slider2">
+  <div class="vslider-items">
+    <img src="image.jpg">
+    <img src="image.jpg">
+    <img src="image.jpg">
+  </div>
+  <button class="vslider-button js-vslider-previous">Previous</button>
+  <button class="vslider-button js-vslider-next">Next</button>
+ </div>
 
 
 #### CSS
 
 
-Add the v_slider stylesheet to the head section of your html file above your custom stylesheets.
+Add the vslider stylesheet to the head section of your html file above your custom stylesheets.
 
-	<link rel="stylesheet" href="path/to/v_slider_styles.css">
+	<link rel="stylesheet" href="path/to/vslider.css">
 
 
-#### Javascript/JQuery
+#### Javascript
 
-Add the v_slider js file to your html just above the closing body tag
+Add the vslider js file to your html just above the closing body tag
 and above your main javascript file.
 
-	<script src="path/to/v_slider.js"></script>
-	<script>
-		// Most basic usage
-		$('.slider-name').v_slider();
+ <script src="path/to/vslider.js"></script>
+ <script>
+ // Most basic usage
+ var el = vs_getAll('.slider1').vs_first();
+ var vs1 = new VSlider(el, {});
 
-		// Using plugin options
-		$('.slider-name').v_slider({
-			max_slider_width: 600,
-			logging: true,
-			paused: true
-		});
-	</script>
+ // Using plugin options
+ var el = vs_getAll('.slider1').vs_first();
+ var vs1 = new VSlider(el, {
+  option1: value,
+  option2: value
+ });
+ </script>
 
 
 ## TODO:
@@ -61,9 +55,4 @@ and above your main javascript file.
 * Ability to have button controls like sportsmenforgod.org.
 * Update Requirements section with all necessary & correct requirements.
 * Figure out list of compatible browsers & devices.
-* Instructions for
-	* Overriding/Customizing css:
-		* Buttons
-		* Slider appearance
-		* etc
 * ...
