@@ -12,7 +12,7 @@
 	<meta name="viewport" content="initial-scale=1">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" type="text/css" href="css/vslider_styles.css">
+	<link rel="stylesheet" type="text/css" href="css/vslider.css">
 	<title>vslider jQuery Plugin</title>
 	<!--[if lt IE 9]>
         <script src="html5shiv.js"></script>
@@ -304,13 +304,13 @@
 				<img src="images/trees.jpg" data-link="http://isaacv.net?t=trees">
 				<img src="images/trout.jpg" data-link="http://isaacv.net?t=trout">
 				<img src="images/trout2.jpg" data-link="http://isaacv.net?t=trout2">
-				<img src="images/kateryan.jpg" data-link="http://isaacv.net?t=river">
+				<!-- <img src="images/kateryan.jpg" data-link="http://isaacv.net?t=river">
 				<img src="images/hyder.jpg" data-link="http://isaacv.net?t=hyder">
 				<img src="images/snow-forest.jpeg" data-link="http://isaacv.net?t=snow-forest">
-				<img src="images/snowcovered.png" data-link="http://isaacv.net?t=snow-covered">
+				<img src="images/snowcovered.png" data-link="http://isaacv.net?t=snow-covered"> -->
 			</div>
-			<button class="v1 vslider-button js-vslider-previous">Previous</button>
-			<button class="v1 vslider-button js-vslider-next">Next</button>
+			<button class="v1 vslider-button vslider-button--full js-vslider-previous">Previous</button>
+			<button class="v1 vslider-button vslider-button--full js-vslider-next">Next</button>
 		</div>
 
 
@@ -328,15 +328,15 @@
 		<div class="vslider slider3">
 			<div class="vslider-items">
 				<div class="card">
-					<h3>Card Title</h3>
+					<h3>Card Title 1</h3>
 					<p>Here is some text for the card.</p>
 				</div>
 				<div class="card">
-					<h3>Card Title</h3>
+					<h3>Card Title 2</h3>
 					<p>Here is some text for the card.</p>
 				</div>
 				<div class="card">
-					<h3>Card Title</h3>
+					<h3>Card Title 3</h3>
 					<p>Here is some text for the card.</p>
 				</div>
 			</div>
@@ -363,7 +363,7 @@
 				<code>
 <pre>
 &lt;head&gt;
- &lt;link rel="stylesheet" href="path/to/vslider_styles.css"&gt;
+ &lt;link rel="stylesheet" href="path/to/vslider.css"&gt;
 &lt;/head&gt;
 </pre>
 				</code>
@@ -374,18 +374,14 @@
 				<code>
 <pre>
 &lt;div class="vslider my_slider"&gt;
- &lt;img src="image.png"&gt;
- &lt;img src="image.png"&gt;
- &lt;img src="image.png"&gt;
- &lt;img src="image.png"&gt;
- &lt;div class="vslider_controls"&gt;
-  &lt;a href="#" data-action="previous" class="vslider_back_button"&gt;
-   &lt;img src="v-slider-images/v-slider-left-arrow.png"&gt;
-  &lt;/a&gt;
-  &lt;a href="#" data-action="next" class="vslider_next_button"&gt;
-   &lt;img src="v-slider-images/v-slider-right-arrow.png"&gt;
-  &lt;/a&gt;
- &lt;/div&gt;
+  &lt;div class="vslider-items"&gt;
+    &lt;img src="image.png"&gt;
+    &lt;img src="image.png"&gt;
+    &lt;img src="image.png"&gt;
+    &lt;img src="image.png"&gt;
+  &lt;/div&gt;
+  &lt;button class="vslider-button js-vslider-previous"&gt;
+  &lt;button class="vslider-button js-vslider-next"&gt;
 &lt;/div&gt;
 </pre>
 				</code>
@@ -405,9 +401,10 @@
 			<div class="code">
 				<code>
 <pre>
-(function ($) {
- <span class="emphasize">$('.my_slider').vslider();</span>
-})(jQuery);
+<span class="emphasize">
+var el = vs_getAll('.slider1').vs_first();
+var vs1 = new VSlider(el, {});
+</span>
 </pre>
 				</code>
 			</div>
@@ -429,38 +426,31 @@
 
 
 
-	<!--SCRIPTS & JQUERY-->
-	<!-- <script type="text/javascript" src="js/libs/jquery-1.10.2.js"></script> -->
+	<!-- SCRIPTS -->
 	<script type="text/javascript" src="js/vslider.js"></script>
 	<script>
+		var el = vs_getAll('.slider1').vs_first();
+		var el2 = vs_getAll('.slider2').vs_first();
+		var el3 = vs_getAll('.slider3').vs_first();
 
-		var slideshow1 = document.querySelector('.slider1'),
-				slideshow2 = document.querySelector('.slider2'),
-				slideshow3 = document.querySelector('.slider3');
+		var options = {};
+		var options2 = {};
+		var options3 = {
+		  slide_selector: '.card'
+		};
 
-		slideshow1.vslider({
-			speed: 4000,
-			max_slider_width: 650,
-			transition_speed: 1, // Transition Speed (in seconds)
-			dev: true,
-			paused: true,
-			logging: true
-		});
+		var vs1 = new VSlider(el, options);
+		var vs2 = new VSlider(el2, options2);
+		var vs3 = new VSlider(el3, options3);
 
-		slideshow2.vslider({
-			speed: 2000,
-			max_slider_width: 250,
-			dev: true,
-			// paused: true,
-			logging: true
-		});
 
-		slideshow3.vslider({
-			speed: 2000,
-			dev: true,
-			paused: true,
-			logging: true
-		});
+		// Possible options
+		// ===
+		// speed: 4000, // the delay between each slide
+		// slide_selector: '.card'
+		// transition_speed: 1, // Transition Speed (in seconds)
+		// paused: true,
+		// logging: true
 
 	</script>
 

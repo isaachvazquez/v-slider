@@ -1,0 +1,78 @@
+/* V SLIDER (MAIN CONTAINER)
+============================= */
+.vslider {
+	position: relative;
+	margin: 0 auto;
+	min-height: 100px;
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+
+
+	margin-bottom: 20px;
+}
+
+.vslider-items {
+	position: relative;
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+.vslider-items.ready { opacity: 1; }
+
+.vslider-item {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	max-width: 100%;
+	opacity: 0;
+	transition: opacity 0.5s;
+	transform: translate(-50%, -50%);
+}
+
+.vslider-item.active { opacity: 1; }
+.vslider-item.portrait { height: 100%; width: auto; }
+.vslider-item.landscape { width: 100%; }
+
+
+/* V SLIDER CONTROLS
+============================= */
+
+.vslider:hover .vslider-button { opacity: 1; }
+.vslider:hover .vslider-button--full { opacity: 0; }
+
+.vslider-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+
+	padding: 15px;
+	height: 50px;
+	opacity: 0;
+	border: 1px solid #000000;
+	cursor: pointer;
+
+	transition: all 0.5s;
+}
+
+.vslider-button:last-child { right: 0; left: auto; }
+
+.vslider-button--full {
+	width: 50%;
+	height: 100%;
+	opacity: 0;
+	cursor: url(cursor2.png) 2 2, pointer;
+	cursor: nw-resize;
+}
+
+.vslider-button--full:last-child { cursor: ne-resize; }
+
+.vslider-button:hover {
+	background-color: #efe;
+}
