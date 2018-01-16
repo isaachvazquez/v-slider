@@ -121,6 +121,25 @@ VSlider.prototype.previousItem = function() {
   el.vs_getAll('[data-v="' + currentItemIndex + '"]').vs_first().classList.add('active');   
 }
 
+VSlider.prototype.goToItem = function(selectedIndex) {
+  var el = this.el,
+      options = this.options;
+
+  var currentItem = el.vs_getAll('.active').vs_first(),
+      currentItemIndex = Number(currentItem.dataset.v),
+      totalItems = el.vs_getAll('.vslider-items ' + options.slide_selector).length;
+
+  // Remove .active from currentItem
+  currentItem.classList.remove('active');
+
+  // Set currentItemIndex to selectedIndex
+  if (selectedIndex > 0 && selectedIndex <= totalItems) { currentItemIndex = selectedIndex; }
+
+
+  // add .active to new currentItem
+  el.vs_getAll('[data-v="' + currentItemIndex + '"]').vs_first().classList.add('active');   
+}
+
 VSlider.prototype._setupElements = function() {
   var el = this.el,
       options = this.options;
