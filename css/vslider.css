@@ -7,8 +7,6 @@
 	width: 100%;
 	max-width: 100%;
 	overflow: hidden;
-
-
 	margin-bottom: 20px;
 }
 
@@ -68,10 +66,10 @@
 	height: 100%;
 	opacity: 0;
 	cursor: url(cursor2.png) 2 2, pointer;
-	cursor: nw-resize;
+	cursor: w-resize;
 }
 
-.vslider-button--full:last-child { cursor: ne-resize; }
+.vslider-button--full:last-child { cursor: e-resize; }
 
 .vslider-button:hover {
 	background-color: #efe;
